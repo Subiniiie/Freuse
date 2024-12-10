@@ -9,7 +9,7 @@ import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
-  Text,
+  ScrollView
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigates/AppNavigator';
@@ -20,7 +20,9 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
-        <AppNavigator />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <AppNavigator />
+        </ScrollView>
       </SafeAreaView> 
     </NavigationContainer>
   );

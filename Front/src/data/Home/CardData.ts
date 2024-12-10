@@ -1,4 +1,3 @@
-import { AnimatableStringValue } from "react-native";
 import { CardData } from "../../types/CardData";
 
 
