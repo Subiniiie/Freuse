@@ -41,7 +41,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
 
                 tabBarActiveTintColor: "00FF00",
                 tabBarInactiveTintColor: "gray",
-                tabBarStyle: { backgroundColor: "FAFAFA", height: 60 },
+                tabBarStyle: { height: 60 },
             })}
         >
             <Tab.Screen name="홈" component={HomeScreen} />
