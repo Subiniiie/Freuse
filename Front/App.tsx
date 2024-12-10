@@ -12,7 +12,7 @@ import {
   Text,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './src/pages/navigates/AppNavigator';
+import AppNavigator from './src/navigates/AppNavigator';
 
 
 

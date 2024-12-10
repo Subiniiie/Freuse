@@ -1,10 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator, BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HomeScreen from "../HomeScreen";
-import CommunityScreen from "../CommunityScreen";
-import MyPageScreen from "../MyPageScreen";
-import SearchScreen from "../SearchScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
+import CommunityScreen from "../screens/Community/CommunityScreen";
+import MyPageScreen from "../screens/Mypage/MyPageScreen";
+import SearchScreen from "../screens/Search/SearchScreen";
 
 type TabParamList = {
     홈: undefined;
