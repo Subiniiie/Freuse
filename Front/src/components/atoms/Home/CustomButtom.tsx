@@ -2,11 +2,13 @@ import React from 'react'
 import { Button, Text } from '@rneui/themed';
 import LinearGradient from 'react-native-linear-gradient';
 import useMain from '../../../hooks/Home/useMain';
+import HomeStyles from '../../../styles/Home/HomeStyles';
 
 const CustomButton = () => {
   const { openFreitagWebsite } = useMain();
   return (
     <Button
+        containerStyle={HomeStyles.CustomButtonContainer}
         ViewComponent={LinearGradient}
         linearGradientProps={{
             colors: ["#FF9800", "#F44336"],
