@@ -20,9 +20,7 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <AppNavigator />
-        </ScrollView>
       </SafeAreaView> 
     </NavigationContainer>
   );
