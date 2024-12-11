@@ -5,7 +5,6 @@ const useMain = () => {
         Linking.openURL("https://media.freitag.ch/ko/media/bags");
     };
 
-
     return {
         openFreitagWebsite
     }

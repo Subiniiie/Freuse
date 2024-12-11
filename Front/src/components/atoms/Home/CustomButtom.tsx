@@ -6,6 +6,7 @@ import HomeStyles from '../../../styles/Home/HomeStyles';
 
 const CustomButton = () => {
   const { openFreitagWebsite } = useMain();
+  
   return (
     <Button
         containerStyle={HomeStyles.CustomButtonContainer}
@@ -19,7 +20,6 @@ const CustomButton = () => {
     >
       <Text>프라이탁 홈페이지 바로 가기</Text>
     </Button>
-
   )
 }
 

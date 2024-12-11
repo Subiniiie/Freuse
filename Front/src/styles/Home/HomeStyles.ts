@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import CustomButton from "../../components/atoms/Home/CustomButtom";
 
 const HomeStyles = StyleSheet.create({
     contentContainer: {
