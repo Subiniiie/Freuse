@@ -5,7 +5,12 @@ import Cards from "../../molecules/Home/Cards";
 const Categotries = () => {
     return (
         <>
-            <CustomText fontStyle="PaperlogyExtraBold" style={{ fontSize: 30 }}>카테고리</CustomText>
+            <CustomText 
+                fontStyle="PaperlogyExtraBold" 
+                style={{ fontSize: 30 }}
+            >
+                카테고리
+            </CustomText>
             <Cards />
         </>
     )
