@@ -5,11 +5,13 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import CommunityScreen from "../screens/Community/CommunityScreen";
 import MyPageScreen from "../screens/Mypage/MyPageScreen";
 import SearchScreen from "../screens/Search/SearchScreen";
+import ChatScreen from "../screens/Chat/ChatScreen";
 
 type TabParamList = {
     홈: undefined;
     검색: undefined;
     거래: undefined;
+    채팅: undefined;
     마이페이지: undefined;
 }
 
@@ -32,6 +34,8 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
                         iconName = "search-outline";
                     } else if (route.name === "거래") {
                         iconName = "earth-outline";
+                    }  else if (route.name === "채팅") {
+                        iconName = "chatbubbles-outline";
                     } else if (route.name === "마이페이지") {
                         iconName = "person-outline";
                     }
@@ -47,6 +51,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
             <Tab.Screen name="홈" component={HomeScreen} />
             <Tab.Screen name="검색" component={SearchScreen} />
             <Tab.Screen name="거래" component={CommunityScreen} />
+            <Tab.Screen name="채팅" component={ChatScreen} />
             <Tab.Screen name="마이페이지" component={MyPageScreen} />
         </Tab.Navigator>
     );
