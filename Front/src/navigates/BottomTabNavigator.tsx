@@ -9,7 +9,7 @@ import SearchScreen from "../screens/Search/SearchScreen";
 type TabParamList = {
     홈: undefined;
     검색: undefined;
-    커뮤니티: undefined;
+    거래: undefined;
     마이페이지: undefined;
 }
 
@@ -30,7 +30,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
                         iconName = "home-outline";
                     } else if (route.name === "검색") {
                         iconName = "search-outline";
-                    } else if (route.name === "커뮤니티") {
+                    } else if (route.name === "거래") {
                         iconName = "earth-outline";
                     } else if (route.name === "마이페이지") {
                         iconName = "person-outline";
@@ -46,7 +46,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
         >
             <Tab.Screen name="홈" component={HomeScreen} />
             <Tab.Screen name="검색" component={SearchScreen} />
-            <Tab.Screen name="커뮤니티" component={CommunityScreen} />
+            <Tab.Screen name="거래" component={CommunityScreen} />
             <Tab.Screen name="마이페이지" component={MyPageScreen} />
         </Tab.Navigator>
     );
