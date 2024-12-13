@@ -1,10 +1,11 @@
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
 import React from 'react'
+import MypageMain from '../../components/templates/Mypage/MypageMain'
 
 export default function MyPageScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>MyPageScreen</Text>
+      <MypageMain />
     </SafeAreaView>
   )
 }

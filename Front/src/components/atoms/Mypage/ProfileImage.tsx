@@ -6,7 +6,7 @@ export default function ProfileImage() {
     <Avatar 
         size={48}
         rounded
-        source={require("/src/public/images/Mypage/profile.jpg")}
+        source={require("../../../public/images/Mypage/profile.jpg")}
     />
   )
 }

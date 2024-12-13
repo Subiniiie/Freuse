@@ -3,7 +3,7 @@ import UserBtn from '../../atoms/Mypage/UserBtn'
 import userSettingData from '../../../data/Mypage/UserSettingData'
 import { FlatList } from 'react-native'
 
-export default function userBtns() {
+export default function UserBtns() {
   return (
     <FlatList 
         data={userSettingData}
