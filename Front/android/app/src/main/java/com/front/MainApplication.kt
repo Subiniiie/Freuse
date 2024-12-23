@@ -34,6 +34,7 @@ class MainApplication : Application(), ReactApplication {
     get() = getDefaultReactHost(applicationContext, reactNativeHost)
 
   override fun onCreate() {
+    SplashScreen.show(this)
     super.onCreate()
     SoLoader.init(this, OpenSourceMergedSoMapping)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {

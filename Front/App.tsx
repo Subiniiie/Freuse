@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
-  ScrollView
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigates/AppNavigator';
