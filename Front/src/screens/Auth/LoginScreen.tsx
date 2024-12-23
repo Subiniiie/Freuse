@@ -1,10 +1,11 @@
-import { StyleSheet, SafeAreaView, Text } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
+import LoginMain from '../../components/templates/Auth/LoginMain'
 
 export default function LoginScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Login</Text>
+      <LoginMain />
     </SafeAreaView>
   )
 }
