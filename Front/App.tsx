@@ -15,7 +15,6 @@ import AppNavigator from './src/navigates/AppNavigator';
 import SplashScreen from 'react-native-splash-screen';
 
 
-
 function App(): React.JSX.Element {
 
   useEffect(() => {
