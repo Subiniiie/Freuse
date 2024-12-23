@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -13,10 +13,18 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigates/AppNavigator';
+import SplashScreen from 'react-native-splash-screen';
 
 
 
 function App(): React.JSX.Element {
+
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+  });
+  
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
