@@ -15,9 +15,19 @@ const Stack = createStackNavigator<AuthParamList>();
 const AuthNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="AuthMain" component={AuthScreen} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen 
+                name="AuthMain" 
+                component={AuthScreen}
+                options={{ headerShown: false}} 
+            />
+            <Stack.Screen 
+                name="SignUp" 
+                component={SignUpScreen} 
+            />
+            <Stack.Screen 
+                name="Login" 
+                component={LoginScreen}
+            />
         </Stack.Navigator>
     )
 };
