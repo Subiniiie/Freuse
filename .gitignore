@@ -626,4 +626,4 @@ obj/
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,visualstudiocode,androidstudio,node,windows,java,intellij
 
-Back/src/main/resources/application-secret.properties
+Back/config/application-secret.properties
