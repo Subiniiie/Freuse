@@ -625,3 +625,5 @@ obj/
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,visualstudiocode,androidstudio,node,windows,java,intellij
+
+application-secret.properties
