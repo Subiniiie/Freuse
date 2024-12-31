@@ -1,18 +1,22 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/freuse?autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul"
-    username: admin
-    password: 0000
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        storage_engine: innodb
-        format_sql: true
-        use_sql_comments: true
-    hibernate:
-      ddl-auto: create # 설정해야 테이블 자동생성
-    open-in-view: false
-    show_sql: true
+  # db 없이 스프링 애플리케이션 활성화 가능
+  # 나중에 db 연결할 때 주석 처리하기
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: "jdbc:mysql://localhost:3306/freuse?autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul"
+#    username: admin
+#    password: freuse1234
+#  jpa:
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    properties:
+#      hibernate:
+#        storage_engine: innodb
+#        format_sql: true
+#        use_sql_comments: true
+#    hibernate:
+#      ddl-auto: create # 설정해야 테이블 자동생성
+#    open-in-view: false
+#    show_sql: true
