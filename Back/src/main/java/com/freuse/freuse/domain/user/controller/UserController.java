@@ -4,7 +4,9 @@ package com.freuse.freuse.domain.user.controller;
 import com.freuse.freuse.domain.user.dto.UserDto;
 import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.service.UserService;
+import com.freuse.freuse.global.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,9 +32,14 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")
-    public ResponseEntity<?> signup(@RequestBody UserDto userDto) {
-        User user = userService.registerUser(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
-        return ResponseEntity.ok("회원가입 성공");
+    public ResponseEntity<String> signup(@RequestBody UserDto userDto) {
+        try {
+            userService.registerUser(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
+            System.out.println("회원가입 성공");
+            return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공");
+        } catch (UserAlreadyExistsException e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
-
 }

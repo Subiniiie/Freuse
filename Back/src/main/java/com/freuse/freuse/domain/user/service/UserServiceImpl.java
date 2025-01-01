@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User registerUser(String username, String password, String email) {
         if (userRepository.existsByUsername(username)) {
-            throw new UserAlreadyExistsException("이미 사용 중인 닉네임입니다.");
+            throw new UserAlreadyExistsException("이미 사용 중인 닉네임 입니다.");
         }
         if (userRepository.existsByEmail(email)) {
             throw new UserAlreadyExistsException("이미 사용 중인 이메일 입니다.");
