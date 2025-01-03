@@ -4,11 +4,8 @@ import SignUpInputBtn from '../../atoms/Auth/SignUpInputBtn';
 import SignUpSubmitBtn from '../../atoms/Auth/SignUpSubmitBtn';
 
 export default function SignUpBtns() {
-    const { submitSignUp } = useSignUp();
 
     return (
-        <>
-            {submitSignUp ? <SignUpSubmitBtn /> : <SignUpInputBtn />}
-        </>
+         <SignUpSubmitBtn />
     )
 }
