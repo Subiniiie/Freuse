@@ -9,20 +9,17 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
     const { checkLogin } = useLogin();
     return (
-        <Stack.Navigator>
-            {checkLogin ? (
+        <Stack.Navigator initialRouteName={checkLogin ? "Main" : "Auth"}>
                 <Stack.Screen 
                     name="Main"
                     component={BottomTabNavigator}
                     options={{headerShown: false}}
                 />
-            ) : (
                 <Stack.Screen 
                     name="Auth"
                     component={AuthNavigator}
                     options={{ headerShown: false }}
                 />
-            )}
         </Stack.Navigator>
     );
 };
