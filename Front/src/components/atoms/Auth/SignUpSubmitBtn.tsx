@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button } from '@rneui/themed'
-import useSignup from '../../../hooks/Auth/Signup/useSignup'
 
-export default function SignUpSubmitBtn() {
-  const { submitSignupForm } = useSignup();
+type SignUpSubmitBtnProps = {
+  submitSignupForm: () => void;
+}
+
+export default function SignUpSubmitBtn({ submitSignupForm }: SignUpSubmitBtnProps) {
 
   return (
     <Button 

@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { SignUpFormData } from "../../../types/SignUpData";
 
 const useSignup = () => {
@@ -9,9 +9,7 @@ const useSignup = () => {
         email: ''
     });
 
-
     const handleChange = useCallback((field: keyof SignUpFormData) => (text: string) => {
-        console.log('실시간 확인', field, text)
         setFormData(prev => ({
             ...prev,
             [field]: text
@@ -19,8 +17,7 @@ const useSignup = () => {
     }, []);
 
     useEffect(() => {
-        console.log('전체 실시간 확인', formData)
-    }, [formData])
+    }, [formData]);
 
     const getValueIndex = (index: number): string => {
         switch(index) {
@@ -42,9 +39,9 @@ const useSignup = () => {
         }
     };
 
-    const submitSignupForm = useCallback(() => {
+    const submitSignupForm = () => {
         console.log('formdata 확인', formData);
-    }, [formData])
+    };
  
     return {
         handleChange,
