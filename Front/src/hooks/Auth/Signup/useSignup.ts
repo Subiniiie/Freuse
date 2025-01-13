@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState, useRef } from "react";
 import { SignUpFormData } from "../../../types/SignUpData";
+import axios from "axios";
+import Config from "react-native-config";
 
 const useSignup = () => {
     const [ formData, setFormData ] = useState<SignUpFormData>({
@@ -40,7 +42,8 @@ const useSignup = () => {
     };
 
     const submitSignupForm = () => {
-        console.log('formdata 확인', formData);
+        // const response = axios.post(`${API_URL}/user/signup`)
+        console.log(Config.API_URL)
     };
  
     return {
