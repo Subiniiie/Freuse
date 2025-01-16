@@ -59,9 +59,15 @@ const useSignup = () => {
     const api_url = Config.API_URL
 
     const submitSignupForm = () => {
+        console.log('formdata 확인', formData)
         const response = axios.post(
             `${api_url}/user/signup`,
-            formData
+            formData, 
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
         )
         .then((res) => {
             console.log('성공', res)
