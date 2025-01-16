@@ -1,7 +1,12 @@
 import React from 'react'
 import { Button } from '@rneui/themed'
 
-export default function SignUpSubmitBtn() {
+type SignUpSubmitBtnProps = {
+  submitSignupForm: () => void;
+}
+
+export default function SignUpSubmitBtn({ submitSignupForm }: SignUpSubmitBtnProps) {
+
   return (
     <Button 
         title={'회원가입'}
@@ -10,6 +15,7 @@ export default function SignUpSubmitBtn() {
             marginHorizontal: 50,
             marginVertical: 10,
         }}
+        onPress={submitSignupForm}
     />
   )
 }

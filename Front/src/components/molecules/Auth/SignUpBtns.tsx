@@ -1,14 +1,13 @@
 import React from 'react'
-import useSignUp from '../../../store/Auth/SignUpStore'
-import SignUpInputBtn from '../../atoms/Auth/SignUpInputBtn';
 import SignUpSubmitBtn from '../../atoms/Auth/SignUpSubmitBtn';
 
-export default function SignUpBtns() {
-    const { submitSignUp } = useSignUp();
+type SignUpBtnsProps = {
+    submitSignupForm: () => void;
+}
+
+export default function SignUpBtns({ submitSignupForm }: SignUpBtnsProps) {
 
     return (
-        <>
-            {submitSignUp ? <SignUpSubmitBtn /> : <SignUpInputBtn />}
-        </>
+         <SignUpSubmitBtn submitSignupForm={submitSignupForm} />
     )
 }
