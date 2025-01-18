@@ -58,17 +58,31 @@ const useSignup = () => {
     // 회원가입 api 연결
     const api_url = Config.API_URL
 
-    const submitSignupForm = () => {
-        const response = axios.post(
-            `${api_url}/user/signup`,
-            formData
-        )
-        .then((res) => {
-            console.log('성공', res)
-        })
-        .catch((res) => {
-            console.log('에러', res)
-        })
+    const submitSignupForm = async () => {
+        console.log('api 요청 확인 전 확인', formData, api_url)
+        try {
+            const response = await axios.post(
+                `${api_url}/api/user/signup`,
+                formData, 
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            console.log('성공', response.data)
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('에러', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status
+                });
+            } else {
+                console.log('알 수 없는 에러', error)
+            }
+
+        };
     };
  
     return {

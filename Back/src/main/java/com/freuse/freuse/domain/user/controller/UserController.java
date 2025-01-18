@@ -25,13 +25,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/signup/{id}")
+    @GetMapping("api/user/signup/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         User user = userService.getUserId(id);
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/user/signup")
+    @PostMapping("api/user/signup")
     public ResponseEntity<String> signup(@RequestBody UserDto userDto) {
         try {
             userService.registerUser(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
