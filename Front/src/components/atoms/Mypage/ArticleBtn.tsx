@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@rneui/themed'
-import { UserArticleData } from '../../../types/UserArticleData'
+import { UserArticleData } from '../../../types/Home/UserArticleData'
 
 type UserArticleComponentsProps = {
     data: UserArticleData;

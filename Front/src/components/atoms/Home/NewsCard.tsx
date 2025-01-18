@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card as CustomCard, Text } from '@rneui/themed'
-import { NewsCardData } from '../../../types/NewsCardData'
+import { NewsCardData } from '../../../types/Home/NewsCardData'
 import HomeStyles from '../../../styles/Home/HomeStyles';
 
 type NewsCardComponentsProps = {

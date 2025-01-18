@@ -1,4 +1,4 @@
-import { CardData } from "../../types/CardData";
+import { CardData } from "../../types/Home/CardData";
 
 
 const cardData: CardData[] = [

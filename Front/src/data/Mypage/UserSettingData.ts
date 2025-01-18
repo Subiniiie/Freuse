@@ -1,4 +1,4 @@
-import { UserSettingData } from "../../types/UserSettingData";
+import { UserSettingData } from "../../types/Auth/UserSettingData";
 
 const userSettingData: UserSettingData[] = [
     {

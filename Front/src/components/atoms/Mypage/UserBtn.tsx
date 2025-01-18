@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@rneui/themed'
-import { UserSettingData } from '../../../types/UserSettingData'
+import { UserSettingData } from '../../../types/Auth/UserSettingData'
 
 type UserSettingComponentsProps = {
   data: UserSettingData;

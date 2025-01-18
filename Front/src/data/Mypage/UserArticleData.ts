@@ -1,4 +1,4 @@
-import { UserArticleData } from "../../types/UserArticleData";
+import { UserArticleData } from "../../types/Home/UserArticleData";
 
 const userArticleData: UserArticleData[] = [
     {

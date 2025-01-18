@@ -1,7 +1,7 @@
 import React from 'react'
-import SignUpInput from '../../atoms/Auth/SignUpInput'
+import SignUpInput from '../../atoms/Auth/Signup/SignUpInput'
 import signUpData from '../../../data/Auth/SignUpData'
-import { SignUpFormDataCheck } from '../../../types/SignUpData';
+import { SignUpFormDataCheck } from '../../../types/Auth/SignUpData';
 
 type SignUpInputsProps = {
   handleChange: (field: keyof SignUpFormDataCheck) => (text: string) => void;

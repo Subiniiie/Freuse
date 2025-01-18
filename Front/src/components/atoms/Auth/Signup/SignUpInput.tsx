@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input } from '@rneui/themed'
-import { SignUpData } from '../../../types/SignUpData'
+import { SignUpData } from '../../../../types/Auth/SignUpData'
 
 type SignUpComponentsProps = {
     data: SignUpData;

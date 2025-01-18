@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@rneui/themed';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AuthParamList } from '../../../navigates/AuthNavigator';
+import { AuthParamList } from '../../../../navigates/AuthNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 type LoginScreenNavigationProps = StackNavigationProp<AuthParamList, "Login">;

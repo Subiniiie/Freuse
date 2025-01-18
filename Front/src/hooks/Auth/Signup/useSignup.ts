@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SignUpFormData, SignUpFormDataCheck } from "../../../types/SignUpData";
+import { SignUpFormData, SignUpFormDataCheck } from "../../../types/Auth/SignUpData";
 import axios from "axios";
 import Config from "react-native-config";
 import { Alert } from "react-native";

@@ -1,5 +1,5 @@
 import React from 'react'
-import SignUpSubmitBtn from '../../atoms/Auth/SignUpSubmitBtn';
+import SignUpSubmitBtn from '../../atoms/Auth/Signup/SignUpSubmitBtn';
 
 type SignUpBtnsProps = {
     submitSignupForm: () => void;

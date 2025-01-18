@@ -1,4 +1,4 @@
-import { SignUpData } from "../../types/SignUpData";
+import { SignUpData } from "../../types/Auth/SignUpData";
 
 const signUpData: SignUpData[] = [
     {

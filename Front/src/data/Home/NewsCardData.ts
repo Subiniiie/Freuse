@@ -1,4 +1,4 @@
-import { NewsCardData } from "../../types/NewsCardData";
+import { NewsCardData } from "../../types/Home/NewsCardData";
 
 const newsCardData: NewsCardData[] = [
     {
