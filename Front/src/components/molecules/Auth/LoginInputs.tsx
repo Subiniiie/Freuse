@@ -19,7 +19,7 @@ export default function LoginInputs({ handleChange, getValueIndex, getFieldIndex
           data={item}
           value={getValueIndex(index)}
           onChangeText={handleChange(getFieldIndex(index))}
-          secureTextEntry={index >= 2}
+          secureTextEntry={index == 1}
         />
       ))}
     </>

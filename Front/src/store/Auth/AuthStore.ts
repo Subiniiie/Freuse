@@ -5,9 +5,9 @@ interface LoginState {
     setCheckLogin: () => void;
 };
 
-const useLogin = create<LoginState>((set) => ({
+const useLoginStore = create<LoginState>((set) => ({
     checkLogin: false,
     setCheckLogin: () => set((state) => ({ checkLogin: !state.checkLogin})),
 }))
 
-export default useLogin;
+export default useLoginStore;

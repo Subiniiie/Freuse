@@ -1,7 +1,11 @@
 import React from 'react'
 import { Button } from '@rneui/themed'
 
-export default function LoginInputBtn() {
+type LoginInputBtnProps = {
+  submitLoginForm: () => void;
+}
+
+export default function LoginInputBtn({ submitLoginForm }: LoginInputBtnProps) {
   return (
     <Button 
         title={'로그인'}
@@ -10,6 +14,7 @@ export default function LoginInputBtn() {
             marginHorizontal: 50,
             marginVertical: 10,
         }}
+        onPress={submitLoginForm}
     />
   )
 }

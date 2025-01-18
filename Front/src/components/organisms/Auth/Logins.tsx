@@ -5,7 +5,7 @@ import useLogin from '../../../hooks/Auth/Login/useLogin'
 
 
 export default function Logins() {
-  const { handleChange, getValueIndex, getFieldIndex } = useLogin();
+  const { handleChange, getValueIndex, getFieldIndex, submitLoginForm } = useLogin();
 
   return (
     <>
@@ -14,7 +14,11 @@ export default function Logins() {
           getValueIndex={getValueIndex}
           getFieldIndex={getFieldIndex}
         />
-        <LoginInputBtn />
+        <LoginInputBtn 
+          submitLoginForm={submitLoginForm
+            
+          }
+        />
     </>
   )
 }

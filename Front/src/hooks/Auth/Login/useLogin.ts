@@ -1,7 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { LogInFormData } from "src/types/Auth/LogInData";
+import axios from "axios";
+import Config from "react-native-config";
+import useLoginStore from "../../../store/Auth/AuthStore";
 
 const useLogin = () => {
+    const { setCheckLogin } = useLoginStore();
     // 로그인 폼
     const [ formData, setFormData ] = useState<LogInFormData>({
         email: '',
@@ -34,10 +38,45 @@ const useLogin = () => {
         }
     };
 
+    // 로그인 api 연결
+    const api_url = Config.API_URL
+
+    const submitLoginForm = async () => {
+        try {
+            const response = await axios.post(
+                `${api_url}/api/user/login`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            console.log('성공', response.data);
+            setCheckLogin();
+            setFormData({
+                email: "",
+                password: ""
+            })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('에러', {
+                    message: error.message,
+                    reponse: error.response?.data,
+                    status: error.response?.status
+                });
+            } else {
+                console.log('알 수 없는 에러', error)
+            }
+        };
+    };
+
+
     return {
         handleChange,
         getValueIndex,
-        getFieldIndex
+        getFieldIndex,
+        submitLoginForm
     }
 };
 

@@ -2,24 +2,28 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import BottomTabNavigator from "./BottomTabNavigator";
 import AuthNavigator from "./AuthNavigator";
-import useLogin from "../store/Auth/AuthStore";
+import useLoginStore from "../store/Auth/AuthStore";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-    const { checkLogin } = useLogin();
+    const { checkLogin } = useLoginStore();
     return (
-        <Stack.Navigator initialRouteName={checkLogin ? "Main" : "Auth"}>
+        <Stack.Navigator>
+            {checkLogin ? (
                 <Stack.Screen 
                     name="Main"
                     component={BottomTabNavigator}
                     options={{headerShown: false}}
                 />
+            ) : (
                 <Stack.Screen 
                     name="Auth"
                     component={AuthNavigator}
                     options={{ headerShown: false }}
                 />
+            )}
+
         </Stack.Navigator>
     );
 };
