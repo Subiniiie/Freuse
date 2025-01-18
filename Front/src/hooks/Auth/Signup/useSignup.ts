@@ -2,6 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import { SignUpFormData, SignUpFormDataCheck } from "../../../types/SignUpData";
 import axios from "axios";
 import Config from "react-native-config";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { AuthParamList } from "src/navigates/AuthNavigator";
+
+type LoginScreenNavigationProps = StackNavigationProp<AuthParamList, "Login">;
+
+type Props = {
+    navigation: LoginScreenNavigationProps;
+};
 
 const useSignup = () => {
     // 회원가입 폼
@@ -17,6 +27,11 @@ const useSignup = () => {
         confirmPassword: '',
         email: ''
     })
+
+    const navigation = useNavigation<LoginScreenNavigationProps>();
+
+    // 회원가입 완료 모달
+    const [visible, setVisible ] = useState<boolean>(false);
 
     const handleChange = useCallback((field: keyof SignUpFormDataCheck) => (text: string) => {
         setTempporaryFormData(prev => ({
@@ -69,7 +84,23 @@ const useSignup = () => {
                     }
                 }
             )
-            console.log('성공', response.data)
+            console.log('성공', response.data);
+            setVisible(true);
+            setTimeout(() => {
+                setFormData({
+                    username: "",
+                    password: "",
+                    email: ""
+                });
+                setTempporaryFormData({
+                    username: "",
+                    password: "",
+                    confirmPassword: "",
+                    email: ""
+                });
+                setVisible(false);
+                navigation.navigate("Login");
+            }, 500);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
@@ -88,7 +119,8 @@ const useSignup = () => {
         handleChange,
         getValueIndex,
         getFieldIndex,
-        submitSignupForm
+        submitSignupForm,
+        visible
     }
 };
 

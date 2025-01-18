@@ -1,10 +1,11 @@
 import React from 'react'
 import SignUpInputs from '../../molecules/Auth/SignUpInputs'
+import SignUpAlert from '../../atoms/Auth/Signup/SignUpAlert'
 import SignUpBtns from '../../molecules/Auth/SignUpBtns'
 import useSignup from '../../../hooks/Auth/Signup/useSignup'
 
 export default function SignUps() {
-  const { handleChange, getValueIndex, getFieldIndex, submitSignupForm } = useSignup();
+  const { handleChange, getValueIndex, getFieldIndex, submitSignupForm, visible } = useSignup();
 
   return (
     <>
@@ -16,6 +17,7 @@ export default function SignUps() {
       <SignUpBtns 
         submitSignupForm={submitSignupForm}
       />
+      {visible && <SignUpAlert />}
     </>
   )
 }
