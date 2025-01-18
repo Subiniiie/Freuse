@@ -42,4 +42,14 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @PostMapping("api/user/login")
+    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
+        boolean isAuthenticated = userService.authenticateUser(userDto.getEmail(), userDto.getPassword());
+        if (isAuthenticated) {
+            return ResponseEntity.ok("로그인 성공");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이메일 또는 비밀번호를 잘못 입력하셨습니다.");
+        }
+    }
 }
