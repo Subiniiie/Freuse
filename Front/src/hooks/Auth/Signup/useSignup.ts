@@ -59,7 +59,6 @@ const useSignup = () => {
     const api_url = Config.API_URL
 
     const submitSignupForm = async () => {
-        console.log('api 요청 확인 전 확인', formData, api_url)
         try {
             const response = await axios.post(
                 `${api_url}/api/user/signup`,
