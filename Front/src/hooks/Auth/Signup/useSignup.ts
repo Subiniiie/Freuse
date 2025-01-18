@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { SignUpFormData, SignUpFormDataCheck } from "../../../types/Auth/SignUpData";
 import axios from "axios";
 import Config from "react-native-config";
-import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthParamList } from "src/navigates/AuthNavigator";
