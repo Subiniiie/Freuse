@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -43,11 +45,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean authenticateUser(String email, String password) {
+    public Optional<User> authenticateUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return true;
+            return Optional.of(user);
         }
-        return false;
+        return Optional.empty();
     }
 }
