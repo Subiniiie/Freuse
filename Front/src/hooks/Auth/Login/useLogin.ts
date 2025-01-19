@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { LogInFormData } from "src/types/Auth/LogInData";
+import { LogInFormData } from "../../../types/Auth/LogInData";
 import axios from "axios";
 import Config from "react-native-config";
 import useLoginStore from "../../../store/Auth/AuthStore";
