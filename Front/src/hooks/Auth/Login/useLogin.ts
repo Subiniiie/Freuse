@@ -3,9 +3,13 @@ import { LogInFormData } from "../../../types/Auth/LogInData";
 import axios from "axios";
 import Config from "react-native-config";
 import useLoginStore from "../../../store/Auth/AuthStore";
+import useUserStore from "../../../store/Auth/UserStore";
+import { reporter } from "metro.config";
 
 const useLogin = () => {
     const { setCheckLogin } = useLoginStore();
+    const { setUsername, setEmail } = useUserStore();
+
     // 로그인 폼
     const [ formData, setFormData ] = useState<LogInFormData>({
         email: '',
@@ -58,6 +62,8 @@ const useLogin = () => {
                 email: "",
                 password: ""
             })
+            setUsername(response.data.username)
+            setEmail(response.data.email)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
