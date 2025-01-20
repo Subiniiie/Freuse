@@ -4,17 +4,35 @@ import axios from "axios";
 import Config from "react-native-config";
 import useLoginStore from "../../../store/Auth/AuthStore";
 import useUserStore from "../../../store/Auth/UserStore";
-import { reporter } from "metro.config";
+import * as KeyChain from "react-native-keychain";
 
 const useLogin = () => {
     const { setCheckLogin } = useLoginStore();
     const { setUsername, setEmail } = useUserStore();
 
+    const TOKEN_USERNAME = 'AUTH_TOKEN';
+    const TOKEN_SERVICE = 'AUTH_SERVICE';
+
     // 로그인 폼
     const [ formData, setFormData ] = useState<LogInFormData>({
         email: '',
         password: ''
-    })
+    });
+
+    // JWT 토큰 저장
+    const storeToken = async (token: string): Promise<boolean> => {
+        try {
+            await KeyChain.setGenericPassword(TOKEN_USERNAME, token, {
+                accessControl: KeyChain.ACCESS_CONTROL.BIOMETRY_ANY,
+                accessible: KeyChain.ACCESSIBLE.WHEN_UNLOCKED,
+                service: TOKEN_SERVICE
+            });
+            return true;
+        } catch (error) {
+            console.log('Failed to store token, error');
+            return false
+        }
+    };
 
     const handleChange = useCallback((field: keyof LogInFormData) => (text: string) => {
         setFormData(prev => ({
@@ -64,6 +82,7 @@ const useLogin = () => {
             })
             setUsername(response.data.username)
             setEmail(response.data.email)
+            const tokenStored = await storeToken(response.data.token)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
@@ -76,6 +95,8 @@ const useLogin = () => {
             }
         };
     };
+
+
 
 
     return {
