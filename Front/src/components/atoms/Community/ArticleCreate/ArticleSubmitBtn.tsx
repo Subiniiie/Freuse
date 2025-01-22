@@ -5,6 +5,9 @@ export default function ArticleSubmitBtn() {
   return (
     <Button 
         title='완료'
+        containerStyle={{
+          width: 100,
+        }}
     />
   )
 }
