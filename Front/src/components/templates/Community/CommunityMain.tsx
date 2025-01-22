@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollView } from 'react-native'
 import CommunityStyles from '../../../styles/Community/CommunityStyles'
 import FilterBar from '../../molecules/Community/FilterBar'
-import WriteBtn from '../../atoms/Community/WriteBtn'
+import WriteBtn from '../../atoms/Community/Main/WriteBtn'
 
 export default function CommunityMain() {
   return (

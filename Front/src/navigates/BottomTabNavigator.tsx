@@ -6,11 +6,13 @@ import CommunityScreen from "../screens/Community/CommunityScreen";
 import MyPageScreen from "../screens/Mypage/MyPageScreen";
 import SearchScreen from "../screens/Search/SearchScreen";
 import ChatScreen from "../screens/Chat/ChatScreen";
+import { NavigatorScreenParams } from "@react-navigation/native";
+import CommunityNavigator, { CommunityParamList } from "./CommunityNavigator";
 
-type TabParamList = {
+export type TabParamList = {
     홈: undefined;
     검색: undefined;
-    거래: undefined;
+    거래: NavigatorScreenParams<CommunityParamList>;
     채팅: undefined;
     마이페이지: undefined;
 }
@@ -50,7 +52,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
         >
             <Tab.Screen name="홈" component={HomeScreen} />
             <Tab.Screen name="검색" component={SearchScreen} />
-            <Tab.Screen name="거래" component={CommunityScreen} />
+            <Tab.Screen name="거래" component={CommunityNavigator} />
             <Tab.Screen name="채팅" component={ChatScreen} />
             <Tab.Screen name="마이페이지" component={MyPageScreen} />
         </Tab.Navigator>
