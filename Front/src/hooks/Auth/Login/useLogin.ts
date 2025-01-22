@@ -27,6 +27,7 @@ const useLogin = () => {
                 accessible: KeyChain.ACCESSIBLE.WHEN_UNLOCKED,
                 service: TOKEN_SERVICE
             });
+            console.log('JWT 토큰 저장 완료')
             return true;
         } catch (error) {
             console.log('Failed to store token, error');
