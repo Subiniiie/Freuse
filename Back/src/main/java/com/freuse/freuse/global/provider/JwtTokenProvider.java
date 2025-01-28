@@ -18,8 +18,8 @@ public class JwtTokenProvider {
 
     private final long validityInMilliseconds = 3600000;
 
-    public String createToken(String email) {
-        Claims claims = Jwts.claims().setSubject(email);
+    public String createToken(String username) {
+        Claims claims = Jwts.claims().setSubject(username);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 
