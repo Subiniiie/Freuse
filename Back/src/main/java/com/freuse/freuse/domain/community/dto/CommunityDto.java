@@ -1,4 +1,4 @@
-package com.freuse.freuse.domain.community;
+package com.freuse.freuse.domain.community.dto;
 
 
 import lombok.Getter;
