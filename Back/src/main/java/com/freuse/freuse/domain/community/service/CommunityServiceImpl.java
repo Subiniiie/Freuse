@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CommunityServiceImpl implements CommuniyuService {
+public class CommunityServiceImpl implements CommunityService {
 
     private final CommunityRepository communityRepository;
     private final UserRepository userRepository;
