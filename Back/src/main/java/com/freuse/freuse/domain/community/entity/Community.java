@@ -25,4 +25,8 @@ public class Community {
 
     @Column(nullable = false)
     private String content;
+
+    public Long getuserId() {
+        return user != null ? user.getId() : null;
+    }
 }

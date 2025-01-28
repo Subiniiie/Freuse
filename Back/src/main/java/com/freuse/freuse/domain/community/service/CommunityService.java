@@ -5,7 +5,7 @@ import com.freuse.freuse.domain.community.entity.Community;
 import java.util.List;
 import java.util.Optional;
 
-public interface CommuniyuService {
+public interface CommunityService {
     //글 작성
     Community createPost(Long userId, String title, String content);
 
