@@ -46,7 +46,7 @@ public class UserController {
         Optional<User> userOptional = userService.authenticateUser(userDto.getEmail(), userDto.getPassword());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String token = jwtTokenProvider.createToken(user.getEmail());
+            String token = jwtTokenProvider.createToken(user.getUsername());
             AuthResponseDto authResponseDto = new AuthResponseDto(token, user.getUsername(), user.getEmail());
             return ResponseEntity.ok(authResponseDto);
         } else {

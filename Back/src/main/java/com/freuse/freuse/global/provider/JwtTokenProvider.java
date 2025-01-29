@@ -13,17 +13,18 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
+
     private final JwtProperties jwtProperties;
+    private SecretKey getSecretKey() {
+        return Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
+    }
 
     public JwtTokenProvider(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
     }
 
-    private SecretKey getSecretKey() {
-        return Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
-    }
-
     public String createToken(String username) {
+
         long validityInMilliseconds = 3600000;
 
         Claims claims = Jwts.claims().setSubject(username);
@@ -48,7 +49,6 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String token) {
-        System.out.println("jwt 토큰 생성 username: " + username);
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())
