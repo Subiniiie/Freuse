@@ -54,7 +54,6 @@ const useArticleCreate = () => {
     const submitArticleCreateForm = async () => {
         try {
             const token = await getToken();
-            console.log('확인', token, formdata)
             const response = await axios.post(
                 `${api_url}/api/community/create`,
                 formdata,
@@ -66,6 +65,7 @@ const useArticleCreate = () => {
             )
             console.log('글쓰기 성공')
             setFormData({
+                username: username,
                 title: '',
                 content: ''
             })
@@ -88,22 +88,22 @@ const useArticleCreate = () => {
             return;
         }
 
-    launchImageLibrary({
-        mediaType: 'photo',
-        selectionLimit: 10 - images.length,
-        maxWidth: 512,
-        maxHeight: 512,
-        includeBase64: true,
-    }, (response) => {
-        if (response.assets) {
-            const newImages = response.assets.map(assets => ({
-                uri: assets.uri!,
-                id: Date.now().toString() + Math.random().toString(),
-            }));
-            setImages(prev => [...prev, ...newImages]);
-        }
-    });
-};
+        launchImageLibrary({
+            mediaType: 'photo',
+            selectionLimit: 10 - images.length,
+            maxWidth: 512,
+            maxHeight: 512,
+            includeBase64: true,
+        }, (response) => {
+            if (response.assets) {
+                const newImages = response.assets.map(assets => ({
+                    uri: assets.uri!,
+                    id: Date.now().toString() + Math.random().toString(),
+                }));
+                setImages(prev => [...prev, ...newImages]);
+            }
+        });
+    };
 
     return {
         formdata,
