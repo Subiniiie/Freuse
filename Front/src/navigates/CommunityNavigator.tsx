@@ -21,7 +21,7 @@ const CommunityNavigator = () => {
             <Stack.Screen 
                 name="ArticleCreate"
                 component={ArticleCreateScreen}
-                options={{ headerShown: false }}
+                // options={{ headerShown: false }}
             />
         </Stack.Navigator>
     )
