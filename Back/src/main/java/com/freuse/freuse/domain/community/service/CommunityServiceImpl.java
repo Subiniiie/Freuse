@@ -22,9 +22,9 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public Community createPost(Long userId, String title, String content) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. ID : " + userId));
+    public Community createPost(String username, String title, String content) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. username : " + username));
 
         Community community = new Community();
         community.setUser(user);
@@ -52,9 +52,9 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<Community> getPostsByUserId(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. ID : " + userId));
+    public List<Community> getPostsByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. username : " + username));
         return communityRepository.findByUser(user);
     }
 

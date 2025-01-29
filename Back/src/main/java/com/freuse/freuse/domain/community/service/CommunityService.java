@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CommunityService {
     //글 작성
-    Community createPost(Long userId, String title, String content);
+    Community createPost(String username, String title, String content);
 
     //특정 글 조회
     Optional<Community> getPostById(Long postId);
@@ -19,7 +19,7 @@ public interface CommunityService {
     void deletePost(Long postId);
 
     // 특정 사용자의 글 조회
-    List<Community> getPostsByUserId(Long userId);
+    List<Community> getPostsByUsername(String username);
 
     //제목으로 검색
     List<Community> searchPostsByTitle(String keyword);

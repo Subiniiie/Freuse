@@ -21,10 +21,10 @@ public class CommunityController {
 
     @PostMapping("/api/community/create")
     public ResponseEntity<CommunityDto> createPost(@RequestBody CommunityRequest request) {
-        Community community = communityService.createPost(request.getUserId(), request.getTitle(), request.getContent());
+        Community community = communityService.createPost(request.getUsername(), request.getTitle(), request.getContent());
 
         CommunityDto communityDto = new CommunityDto();
-        communityDto.setUserId(community.getUserId());
+        communityDto.setUsername(community.getUsername());
         communityDto.setTitle(community.getTitle());
         communityDto.setContent(community.getContent());
 

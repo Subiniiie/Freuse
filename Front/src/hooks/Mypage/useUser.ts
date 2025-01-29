@@ -6,7 +6,6 @@ const useUser = () => {
     const { setCheckLogin } = useLoginStore();
     const { setUsername, setEmail } = useUserStore();
 
-    const TOKEN_USERNAME = 'AUTH_TOKEN';
     const TOKEN_SERVICE = 'AUTH_SERVICE';
 
     const handlePress = (name: string) => {

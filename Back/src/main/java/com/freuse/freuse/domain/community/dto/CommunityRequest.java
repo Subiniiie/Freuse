@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CommunityRequest {
 
-    private Long userId;
+    private String username;
     private String title;
     private String content;
 }

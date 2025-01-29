@@ -2,6 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { launchImageLibrary } from 'react-native-image-picker';
 import { ArticleCreateFormData } from "../../../types/Community/ArticleCreateData";
+import axios from "axios";
+import Config from 'react-native-config';
+import * as KeyChain from 'react-native-keychain';
+import useUserStore from "../../../store/Auth/UserStore";
 
 type ImageType = {
     uri: string;
@@ -9,11 +13,33 @@ type ImageType = {
 };
 
 const useArticleCreate = () => {
+    const { username } = useUserStore();
+
     const [ images, setImages ] = useState<ImageType[]>([]);
     const [ formdata, setFormData ] = useState<ArticleCreateFormData>({
+        username: username,
         title: '',
         content: ''
     });
+
+    const api_url = Config.API_URL
+    const TOKEN_SERVICE = 'AUTH_SERVICE';
+
+    const getToken = async (): Promise<string | null> => {
+        try {
+            const credentials = await KeyChain.getGenericPassword({
+                service: TOKEN_SERVICE
+            });
+
+            if (credentials) {
+                return credentials.password;
+            }
+            return null;
+        } catch (error) {
+            console.log('Failed to get token : ', error);
+            return null;
+        }
+    };
 
     const handleChange = useCallback((field: keyof ArticleCreateFormData) => (text: string) => {
         setFormData(prev => ({
@@ -23,12 +49,38 @@ const useArticleCreate = () => {
     }, []);
 
     useEffect(() => {
-        console.log('formData 실시간 확인', formdata)
     }, [formdata])
 
     const submitArticleCreateForm = async () => {
-        console.log('formData확인', formdata)
-    }
+        try {
+            const token = await getToken();
+            console.log('확인', token, formdata)
+            const response = await axios.post(
+                `${api_url}/api/community/create`,
+                formdata,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            )
+            console.log('글쓰기 성공')
+            setFormData({
+                title: '',
+                content: ''
+            })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('에러', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status
+                });
+            } else {
+                console.log('알 수 없는 에러', error)
+            }
+        };
+    };
 
     const handleSelectImages = () => {
         if (images.length >= 10) {

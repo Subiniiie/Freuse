@@ -87,7 +87,7 @@ const useLogin = () => {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
                     message: error.message,
-                    reponse: error.response?.data,
+                    response: error.response?.data,
                     status: error.response?.status
                 });
             } else {
