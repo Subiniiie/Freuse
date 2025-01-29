@@ -23,8 +23,12 @@ const useArticleCreate = () => {
     }, []);
 
     useEffect(() => {
-        console.log('글쓰기 확인', formdata)
+        console.log('formData 실시간 확인', formdata)
     }, [formdata])
+
+    const submitArticleCreateForm = async () => {
+        console.log('formData확인', formdata)
+    }
 
     const handleSelectImages = () => {
         if (images.length >= 10) {
@@ -53,6 +57,7 @@ const useArticleCreate = () => {
         formdata,
         handleChange,
         handleSelectImages,
+        submitArticleCreateForm
     }
 }
 
