@@ -2,7 +2,6 @@ package com.freuse.freuse.domain.community.repository;
 
 import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.user.entity.User;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -31,6 +31,8 @@ public class CommunityServiceImpl implements CommunityService {
         community.setTitle(title);
         community.setContent(content);
 
+        System.out.println("게시물 저장?" + title + content + user);
+
         return communityRepository.save(community);
     }
 

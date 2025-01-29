@@ -1,10 +1,11 @@
 package com.freuse.freuse.domain.user.repository;
 
 import com.freuse.freuse.domain.user.entity.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -15,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
     User findByEmail(String email);
+
+    Optional<User> findByUsername(String username);
 }

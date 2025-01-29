@@ -4,7 +4,6 @@ package com.freuse.freuse.domain.user.service;
 import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.repository.UserRepository;
 import com.freuse.freuse.global.exception.UserAlreadyExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

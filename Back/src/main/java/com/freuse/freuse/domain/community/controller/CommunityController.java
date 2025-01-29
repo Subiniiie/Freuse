@@ -24,7 +24,7 @@ public class CommunityController {
         Community community = communityService.createPost(request.getUserId(), request.getTitle(), request.getContent());
 
         CommunityDto communityDto = new CommunityDto();
-        communityDto.setUserId(community.getuserId());
+        communityDto.setUserId(community.getUserId());
         communityDto.setTitle(community.getTitle());
         communityDto.setContent(community.getContent());
 

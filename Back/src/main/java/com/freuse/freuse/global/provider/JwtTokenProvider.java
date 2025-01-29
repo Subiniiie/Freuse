@@ -5,7 +5,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Component
@@ -16,9 +19,13 @@ public class JwtTokenProvider {
         this.jwtProperties = jwtProperties;
     }
 
-    private final long validityInMilliseconds = 3600000;
+    private SecretKey getSecretKey() {
+        return Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
+    }
 
     public String createToken(String username) {
+        long validityInMilliseconds = 3600000;
+
         Claims claims = Jwts.claims().setSubject(username);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -27,21 +34,26 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret().getBytes())
+                .signWith(getSecretKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String getEmailFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(jwtProperties.getSecret().getBytes())
-                .parseClaimsJwt(token)
+    public String getUsernameFromToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSecretKey())
+                .build()
+                .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
 
     public boolean validateToken(String token) {
+        System.out.println("jwt 토큰 생성 username: " + username);
         try {
-            Jwts.parser().setSigningKey(jwtProperties.getSecret().getBytes()).parseClaimsJws(token);
+            Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())
+                    .build()
+                    .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalStateException e) {
             return false;
