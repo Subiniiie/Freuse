@@ -1,7 +1,13 @@
 import React from 'react'
 import { Input } from '@rneui/themed'
 
-export default function ContentInput() {
+type ContentInputProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+}
+
+
+const ContentInput:React.FC<ContentInputProps> = ({ value, onChangeText }) => {
   return (
     <Input 
       placeholder='내용을 입력하세요.'
@@ -13,6 +19,10 @@ export default function ContentInput() {
           borderRadius: 5,
           height: 270,
       }}
+      value={value}
+      onChangeText={onChangeText}
     />
   )
 }
+
+export default ContentInput;

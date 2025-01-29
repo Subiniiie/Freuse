@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { launchImageLibrary } from 'react-native-image-picker';
-import { assets } from "react-native.config";
+import { ArticleCreateFormData } from "../../../types/Community/ArticleCreateData";
 
 type ImageType = {
     uri: string;
@@ -10,6 +10,21 @@ type ImageType = {
 
 const useArticleCreate = () => {
     const [ images, setImages ] = useState<ImageType[]>([]);
+    const [ formdata, setFormData ] = useState<ArticleCreateFormData>({
+        title: '',
+        content: ''
+    });
+
+    const handleChange = useCallback((field: keyof ArticleCreateFormData) => (text: string) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: text
+        }));
+    }, []);
+
+    useEffect(() => {
+        console.log('글쓰기 확인', formdata)
+    }, [formdata])
 
     const handleSelectImages = () => {
         if (images.length >= 10) {
@@ -35,6 +50,8 @@ const useArticleCreate = () => {
 };
 
     return {
+        formdata,
+        handleChange,
         handleSelectImages,
     }
 }

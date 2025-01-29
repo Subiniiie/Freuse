@@ -1,5 +1,4 @@
 import React from 'react'
-import { View } from 'react-native'
 import LogInInput from '../../atoms/Auth/Login/LogInInput'
 import { LogInFormData } from '../../../types/Auth/LogInData'
 import logInData from '../../../data/Auth/LogInData'

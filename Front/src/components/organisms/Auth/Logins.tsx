@@ -15,9 +15,7 @@ export default function Logins() {
           getFieldIndex={getFieldIndex}
         />
         <LoginInputBtn 
-          submitLoginForm={submitLoginForm
-            
-          }
+          submitLoginForm={submitLoginForm}
         />
     </>
   )
