@@ -41,7 +41,6 @@ const useCommunityMain = () => {
                     }
                 }
             )
-            console.log('article 목록 가져오기 성공', response.data)
             setArticleList(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {

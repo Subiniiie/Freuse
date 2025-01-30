@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { ActivityIndicator, ScrollView } from 'react-native'
 import CommunityStyles from '../../../styles/Community/CommunityStyles'
 import FilterBar from '../../molecules/Community/FilterBar'
@@ -7,6 +7,7 @@ import useCommunityMain from '../../../hooks/Community/Main/useCommunityMain'
 import { useFocusEffect } from '@react-navigation/native'
 import useArticleListStore from '../../../store/Community/ArticleListStore'
 import { Text } from '@rneui/themed'
+import Article from '../../atoms/Community/Main/Article'
 
 export default function CommunityMain() {
   const { getArticleList } = useCommunityMain();
@@ -30,8 +31,11 @@ export default function CommunityMain() {
     <>
       <ScrollView contentContainerStyle={CommunityStyles.contentContainer}>
           <FilterBar />
-          {articleList.map((article, index) => (
-            <Text key={article.id}>{article.title}</Text>
+          {articleList.map((article) => (
+            <Article 
+              key={article.id} 
+              article={article} 
+            />
           ))}
       </ScrollView>
       {/* 화면에 고정되어야 함 -> 스크롤 되면 안됨 -> ScrollView 밖에 위치 */}

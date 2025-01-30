@@ -13,6 +13,17 @@ const CommunityStyles = StyleSheet.create({
         height: 45,
         resizeMode: 'contain',
     },
+    articleListContainer: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee',
+
+    },
+    articleUserInfoContainer: {
+        marginTop: 5,
+        flexDirection: 'row',
+        gap: 8
+    },
 })
 
 

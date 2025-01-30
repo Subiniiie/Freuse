@@ -4,7 +4,8 @@ interface ArticleInfo {
     id: number;
     title: string;
     content: string;
-    createAt: string;
+    username: string;
+    createdAt: string;
     updatedAt: string;
 }
 
