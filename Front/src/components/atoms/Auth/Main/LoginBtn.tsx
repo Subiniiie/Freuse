@@ -6,10 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 
 type LoginScreenNavigationProps = StackNavigationProp<AuthParamList, "Login">;
 
-type Props = {
-  navigation: LoginScreenNavigationProps;
-};
-
 export default function LoginBtn() {
   const navigation = useNavigation<LoginScreenNavigationProps>();
 
