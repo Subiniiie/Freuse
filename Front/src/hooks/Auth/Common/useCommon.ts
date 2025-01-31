@@ -9,8 +9,10 @@ const useCommon = () => {
     const { error } = useCommonStore();
 
     useEffect(() => {
-        console.log('error :', error)
-    }, [error])
+        if (error !== null) {
+            console.log('error :', error)
+        }
+    }, [error]);
 
     const getToken = async (): Promise<string | null> => {
         try {
