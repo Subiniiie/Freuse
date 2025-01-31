@@ -63,7 +63,6 @@ const useArticleCreate = () => {
                     }
                 }
             )
-            console.log('글쓰기 성공')
             setFormData({
                 username: username,
                 title: '',

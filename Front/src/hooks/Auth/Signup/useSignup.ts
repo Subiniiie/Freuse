@@ -83,7 +83,6 @@ const useSignup = () => {
                     }
                 }
             )
-            console.log('성공', response.data);
             setVisible(true);
             setTimeout(() => {
                 setFormData({

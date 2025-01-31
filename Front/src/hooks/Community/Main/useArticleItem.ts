@@ -10,10 +10,6 @@ import useArticleItemStore from "../../../store/Community/ArticleItemStore";
 
 type ArticleItemScreenProps = StackNavigationProp<CommunityParamList, "ArticleItem">;
 
-interface getArticleItemProps {
-    id: number;
-}
-
 const useArticleItem = () => {
 
     const api_url = Config.API_URL;
@@ -32,7 +28,6 @@ const useArticleItem = () => {
         
         try {
             const token = await getToken();
-            console.log('상세페이지 정보 가져오기 시도', token, api_url, id)
             const response = await axios.get(
                 `${api_url}/api/community/${id}`,
                 {
@@ -42,7 +37,6 @@ const useArticleItem = () => {
                 }
             )
             setArticleItem(response.data)
-            console.log('게시물 정보 저장 성공')
             navigation.navigate("ArticleItem")
         } catch (error) {
             if (axios.isAxiosError(error)) {

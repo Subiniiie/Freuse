@@ -20,7 +20,6 @@ const useUser = () => {
             await KeyChain.resetGenericPassword({
                 service: TOKEN_SERVICE
             });
-            console.log('로그아웃 성공')
             return true;
         } catch (error) {
             console.log('Failed to remove token:', error);
