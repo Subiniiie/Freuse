@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { CommunityParamList } from "src/navigates/CommunityNavigator";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import useArticleItemStore from "../../../store/Community/ArticleItemStore";
 
 type ArticleItemScreenProps = StackNavigationProp<CommunityParamList, "ArticleItem">;
 
@@ -19,6 +20,7 @@ const useArticleItem = () => {
 
     const { getToken } = useCommon();
     const { setIsLoading, setError } = useCommonStore.getState();
+    const { setArticleItem } = useArticleItemStore();
 
     const navigation = useNavigation<ArticleItemScreenProps>();
 
@@ -39,7 +41,8 @@ const useArticleItem = () => {
                     }
                 }
             )
-            console.log('게시물 상세 정보 가져오기', response.data)
+            setArticleItem(response.data)
+            console.log('게시물 정보 저장 성공')
             navigation.navigate("ArticleItem")
         } catch (error) {
             if (axios.isAxiosError(error)) {

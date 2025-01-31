@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface ArticleInfo {
+export interface ArticleInfo {
     id: number;
     title: string;
     content: string;
