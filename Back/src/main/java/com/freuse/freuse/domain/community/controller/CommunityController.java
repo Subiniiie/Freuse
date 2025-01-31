@@ -8,10 +8,7 @@ import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.community.service.CommunityService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +37,23 @@ public class CommunityController {
                         community.getCreatedAt(),
                         community.getUpdatedAt()))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/community/{id}")
+    public ResponseEntity<CommunityResponseDto> getArticle(@PathVariable Long id) {
+        Community community = communityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id :" + id));
+
+        CommunityResponseDto communityResponseDto = new CommunityResponseDto(
+                community.getId(),
+                community.getTitle(),
+                community.getContent(),
+                community.getUsername(),
+                community.getCreatedAt(),
+                community.getUpdatedAt()
+        );
+
+        return ResponseEntity.ok(communityResponseDto);
     }
 
     @PostMapping("/api/community/create")
