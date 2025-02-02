@@ -1,7 +1,7 @@
 import React from 'react'
 import TitleInput from '../../../atoms/Community/ArticleCreate/TitleInput'
 import ContentInput from '../../../atoms/Community/ArticleCreate/ContentInput'
-import { ArticleCreateFormData } from 'src/types/Community/ArticleCreateData'
+import { ArticleCreateFormData } from '../../../../types/Community/ArticleCreateData'
 
 
 export interface InputsProps {
