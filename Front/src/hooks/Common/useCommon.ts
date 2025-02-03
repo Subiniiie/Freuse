@@ -3,7 +3,7 @@ import useArticleUpdate from "../Community/ArticleUpdate/useArticleUpdate";
 
 
 const useCommon = () => {
-    const { goArticleUpdateScreen } = useArticleUpdate();
+    const { goArticleUpdateScreen, submitArticleUpdateForm } = useArticleUpdate();
 
 
     const decideBtn = (title: string) => {
