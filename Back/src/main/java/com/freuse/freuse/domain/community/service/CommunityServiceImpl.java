@@ -4,6 +4,7 @@ import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.repository.UserRepository;
+import org.hibernate.query.sqm.tree.domain.SqmTreatedRoot;
 import org.springframework.stereotype.Service;
 
 import java.lang.module.ResolutionException;
@@ -61,5 +62,16 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<Community> searchPostsByTitle(String keyword) {
         return communityRepository.findByTitleContaining(keyword);
+    }
+
+    @Override
+    public Community updatePost(Long id, String username, String title, String content) {
+        Community community = communityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다. ID : " + id));
+
+        community.setTitle(title);
+        community.setContent(content);
+
+        return communityRepository.save(community);
     }
 }
