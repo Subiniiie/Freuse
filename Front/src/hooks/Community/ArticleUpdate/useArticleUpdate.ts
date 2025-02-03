@@ -7,18 +7,19 @@ import useArticleItemStore from "../../../store/Community/ArticleItemStore";
 import useCommon from "../../Auth/Common/useCommon";
 import axios from "axios";
 import Config from 'react-native-config';
+import useArticleListStore from "../../../store/Community/ArticleListStore";
 
-type ArticleUpdateScreenNavigationProps = StackNavigationProp<CommunityParamList, "ArticleUpdate">;
+
+type ArticleUpdateScreenNavigationProps = StackNavigationProp<CommunityParamList, "ArticleUpdate", "ArticleItem">;
 
 const useArticleUpdate = () => {
 
     const navigation = useNavigation<ArticleUpdateScreenNavigationProps>();    
-    const { articleItem } = useArticleItemStore();
+    const { articleItem, setArticleItem } = useArticleItemStore();
+    const { updateArticle } = useArticleListStore();
+
     const { getToken } = useCommon();
-
     const api_url = Config.API_URL
-
-
 
     const [ formData, setFormData ] = useState<ArticleUpdateFormData>({
         // 기존에 저장된 값 불러와야함
@@ -63,7 +64,12 @@ const useArticleUpdate = () => {
                     }
                 }
             )
-            console.log('api 요청 성공', response.data)
+            if (articleItem?.id) {
+                updateArticle(articleItem?.id, formData)
+                navigation.navigate("ArticleItem")
+                setArticleItem(response.data)
+                console.log('api 요청 성공', response.data)
+            }
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {

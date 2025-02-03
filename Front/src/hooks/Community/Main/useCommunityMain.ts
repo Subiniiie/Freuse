@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import axios from "axios"
 import Config from "react-native-config"
 import * as KeyChain from "react-native-keychain"
@@ -8,7 +9,7 @@ const useCommunityMain = () => {
     const api_url = Config.API_URL;
     const TOKEN_SERVICE = 'AUTH_SERVICE';  
 
-    const { setArticleList } = useArticleListStore();
+    const { setArticleList, articleList } = useArticleListStore();
 
     const getToken = async (): Promise<string | null> => {
         try {
@@ -25,6 +26,9 @@ const useCommunityMain = () => {
             return null;
         }
     };
+
+    useEffect(() => {
+    }, [articleList])
 
     const getArticleList = async () => {
         const { setLoading, setError } = useArticleListStore.getState();
