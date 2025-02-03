@@ -4,7 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { CommunityParamList } from "src/navigates/CommunityNavigator";
 import { useNavigation } from "@react-navigation/native";
 import useArticleItemStore from "../../../store/Community/ArticleItemStore";
-
+import useCommon from "../../Auth/Common/useCommon";
 
 type ArticleUpdateScreenNavigationProps = StackNavigationProp<CommunityParamList, "ArticleUpdate">;
 
@@ -12,6 +12,7 @@ const useArticleUpdate = () => {
 
     const navigation = useNavigation<ArticleUpdateScreenNavigationProps>();    
     const { articleItem } = useArticleItemStore();
+    const { getToken } = useCommon();
 
 
     const [ formData, setFormData ] = useState<ArticleUpdateFormData>({
@@ -30,6 +31,7 @@ const useArticleUpdate = () => {
     }, [articleItem]);
 
     useEffect(() => {
+        console.log('실시간 변동', formData)
     }, [formData])
 
     const handleUpdateChange = useCallback((field: keyof ArticleUpdateFormData) => (text: string) => {
@@ -44,7 +46,9 @@ const useArticleUpdate = () => {
     }
 
     const submitArticleUpdateForm = async () => {
-        console.log('수정 전 확인', formData)
+        console.log('안녕')
+        const token = await getToken();
+        console.log('수정 전 확인', formData, token)
     }
 
     return {

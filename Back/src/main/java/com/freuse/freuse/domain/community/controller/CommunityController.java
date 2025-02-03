@@ -7,6 +7,7 @@ import com.freuse.freuse.domain.community.dto.CommunityResponseDto;
 import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.community.service.CommunityService;
+import com.freuse.freuse.domain.community.service.CommunityServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,5 +67,24 @@ public class CommunityController {
         communityDto.setContent(community.getContent());
 
         return ResponseEntity.ok(communityDto);
+    }
+
+    @PutMapping("/api/community/{id}")
+    public ResponseEntity<CommunityResponseDto> updatePost(
+            @PathVariable Long id,
+            @RequestBody CommunityRequest request) {
+
+        Community updatedCommunity = communityService.updatePost(id, request.getUsername(), request.getTitle(), request.getContent());
+
+        CommunityResponseDto responseDto = new CommunityResponseDto(
+                updatedCommunity.getId(),
+                updatedCommunity.getTitle(),
+                updatedCommunity.getContent(),
+                updatedCommunity.getUsername(),
+                updatedCommunity.getCreatedAt(),
+                updatedCommunity.getUpdatedAt()
+        );
+
+        return ResponseEntity.ok(responseDto);
     }
 }

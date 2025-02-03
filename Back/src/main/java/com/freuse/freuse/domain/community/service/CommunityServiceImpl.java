@@ -64,7 +64,7 @@ public class CommunityServiceImpl implements CommunityService {
         return communityRepository.findByTitleContaining(keyword);
     }
 
-    @Override
+
     public Community updatePost(Long id, String username, String title, String content) {
         Community community = communityRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다. ID : " + id));
