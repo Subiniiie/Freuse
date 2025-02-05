@@ -8,6 +8,11 @@ const HomeStyles = StyleSheet.create({
     categoryCard: {
         width: 175,
         height: 165,
+        padding: 0,
+    },
+    CategoryCardBackImage: {
+        width: "100%",
+        height: "100%",
     },
     newsCard: {
         height: 130,

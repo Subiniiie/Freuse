@@ -5,7 +5,7 @@ const cardData: CardData[] = [
     {
         id: 1,
         name: "BAGS",
-        imageUrl: "bag",
+        imageUrl: "bags",
     },
     {
         id: 2,
@@ -15,12 +15,12 @@ const cardData: CardData[] = [
     {
         id: 3,
         name: "POUCHES",
-        imageUrl: "pouch"
+        imageUrl: "pouches"
     },
     {
         id: 4,
         name: "WALLETS",
-        imageUrl: "wallet"
+        imageUrl: "wallets"
     },
 ];
 
