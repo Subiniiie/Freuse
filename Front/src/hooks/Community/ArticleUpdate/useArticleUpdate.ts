@@ -81,14 +81,31 @@ const useArticleUpdate = () => {
                 console.log('알 수 없는 에러', error)
             }
         }
-    
-    }
+    };
+
+    const submitArticleDelete = async () => {
+        try {
+            const token = await getToken();
+            console.log('게시물 삭제', token)
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('에러', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status
+                });
+            } else {
+                console.log('알 수 없는 에러', error)
+            }
+        }
+    };
 
     return {
         formData,
         handleUpdateChange,
         goArticleUpdateScreen,
-        submitArticleUpdateForm
+        submitArticleUpdateForm,
+        submitArticleDelete
     }
 }
 
