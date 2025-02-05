@@ -87,4 +87,15 @@ public class CommunityController {
 
         return ResponseEntity.ok(responseDto);
     }
+
+    @DeleteMapping("/api/community/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+
+        Community community = communityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+
+        communityRepository.delete(community);
+
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -5,14 +5,14 @@ import useArticleUpdate from '../../../../hooks/Community/ArticleUpdate/useArtic
 
 export default function ArticleItemBtns() {
 
-    const { goArticleUpdateScreen, submitArticleDelete } = useArticleUpdate();
+    const { goArticleUpdateScreen, submitArticleDeleteForm } = useArticleUpdate();
 
     return (
         articleItemBtnsData.map((data) => (
             <CommonBtn 
                 key={data.id} 
                 title={data.title} 
-                onPress={data.id === 1 ? goArticleUpdateScreen : submitArticleDelete}
+                onPress={data.id === 1 ? goArticleUpdateScreen : submitArticleDeleteForm}
             />
         ))
     )

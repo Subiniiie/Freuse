@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { Alert } from "react-native";
 import { ArticleUpdateFormData } from "../../../types/Community/ArticleUpdateData";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommunityParamList } from "src/navigates/CommunityNavigator";
@@ -16,7 +17,7 @@ const useArticleUpdate = () => {
 
     const navigation = useNavigation<ArticleUpdateScreenNavigationProps>();    
     const { articleItem, setArticleItem } = useArticleItemStore();
-    const { updateArticle } = useArticleListStore();
+    const { updateArticle, removeArticle } = useArticleListStore();
 
     const { getToken } = useCommon();
     const api_url = Config.API_URL
@@ -86,7 +87,18 @@ const useArticleUpdate = () => {
     const submitArticleDelete = async () => {
         try {
             const token = await getToken();
-            console.log('게시물 삭제', token)
+            const response = await axios.delete(
+                `${api_url}/api/community/${articleItem?.id}`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            )
+            if (articleItem?.id) {
+                removeArticle(articleItem?.id)
+                navigation.navigate("CommunityMain")
+            }
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
@@ -100,12 +112,31 @@ const useArticleUpdate = () => {
         }
     };
 
+    const submitArticleDeleteForm = async () => {
+        Alert.alert(
+            "삭제 요청",
+            "게시물을 삭제하시겠습니까?",
+            [
+                {
+                    text: "예",
+                    onPress: () => {
+                        submitArticleDelete();
+                    }
+                },
+                {
+                    text: "아니요",
+                    onPress: () => {}
+                }
+            ]
+        )
+    };
+
     return {
         formData,
         handleUpdateChange,
         goArticleUpdateScreen,
         submitArticleUpdateForm,
-        submitArticleDelete
+        submitArticleDeleteForm
     }
 }
 
