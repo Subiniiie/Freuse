@@ -6,6 +6,8 @@ import axios from "axios";
 import Config from 'react-native-config';
 import * as KeyChain from 'react-native-keychain';
 import useUserStore from "../../../store/Auth/UserStore";
+import useCategorySelectOption from "./useCategorySelectOption";
+
 
 type ImageType = {
     uri: string;
@@ -21,6 +23,8 @@ const useArticleCreate = () => {
         title: '',
         content: ''
     });
+
+    const { value } = useCategorySelectOption();
 
     const api_url = Config.API_URL
     const TOKEN_SERVICE = 'AUTH_SERVICE';
@@ -51,7 +55,9 @@ const useArticleCreate = () => {
     useEffect(() => {
     }, [formdata])
 
+
     const submitArticleCreateForm = async () => {
+        console.log('카테고리는 ', value, "이다")
         try {
             const token = await getToken();
             const response = await axios.post(
