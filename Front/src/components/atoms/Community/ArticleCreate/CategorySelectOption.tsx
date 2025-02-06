@@ -16,7 +16,7 @@ export default function CategorySelectOption() {
             placeholder='카테고리를 선택하세요.'
             style={{
                 width: 200,
-                zIndex: 1
+                zIndex: 3
             }}
         />
     )

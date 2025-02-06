@@ -40,8 +40,7 @@ const useDetailedCategorySelectOption = () => {
                     {label: 'wallets', value: 'wallets'}
                 ];
             default :
-            return [];
-            
+                return [];
         }
     }, [value]);
 

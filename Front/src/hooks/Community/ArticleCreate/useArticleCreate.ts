@@ -7,7 +7,8 @@ import Config from 'react-native-config';
 import * as KeyChain from 'react-native-keychain';
 import useUserStore from "../../../store/Auth/UserStore";
 import useCategorySelectOption from "./useCategorySelectOption";
-
+import useDetailedCategorySelectOption from "./useDetailedCategorySelectOption";
+import useProductSelectOption from "./useProductSelectOption";
 
 type ImageType = {
     uri: string;
@@ -25,6 +26,8 @@ const useArticleCreate = () => {
     });
 
     const { value } = useCategorySelectOption();
+    const { detailedValue } = useDetailedCategorySelectOption();
+    const { productValue } = useProductSelectOption();
 
     const api_url = Config.API_URL
     const TOKEN_SERVICE = 'AUTH_SERVICE';
@@ -57,7 +60,7 @@ const useArticleCreate = () => {
 
 
     const submitArticleCreateForm = async () => {
-        console.log('카테고리는 ', value, "이다")
+        console.log('카테고리는 ', value, detailedValue, productValue, "이다")
         try {
             const token = await getToken();
             const response = await axios.post(
