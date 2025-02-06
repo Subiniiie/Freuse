@@ -1,16 +1,15 @@
 import React from "react";
 import { createBottomTabNavigator, BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import HomeScreen from "../screens/Home/HomeScreen";
-import CommunityScreen from "../screens/Community/CommunityScreen";
 import MyPageScreen from "../screens/Mypage/MyPageScreen";
 import SearchScreen from "../screens/Search/SearchScreen";
 import ChatScreen from "../screens/Chat/ChatScreen";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import CommunityNavigator, { CommunityParamList } from "./CommunityNavigator";
+import HomeNavigator, { HomeParamList } from "./HomeNavigator";
 
 export type TabParamList = {
-    홈: undefined;
+    홈: NavigatorScreenParams<HomeParamList>;
     검색: undefined;
     거래: NavigatorScreenParams<CommunityParamList>;
     채팅: undefined;
@@ -50,7 +49,7 @@ const BottomTabNavigator:React.FC<BottomTabNavigatorProps> = ({ navigation }) =>
                 tabBarStyle: { height: 60 },
             })}
         >
-            <Tab.Screen name="홈" component={HomeScreen} />
+            <Tab.Screen name="홈" component={HomeNavigator} />
             <Tab.Screen name="검색" component={SearchScreen} />
             <Tab.Screen name="거래" component={CommunityNavigator} />
             <Tab.Screen name="채팅" component={ChatScreen} />
