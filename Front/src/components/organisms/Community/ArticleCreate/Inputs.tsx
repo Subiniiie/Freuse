@@ -2,7 +2,6 @@ import React from 'react'
 import TitleInput from '../../../atoms/Community/ArticleCreate/TitleInput'
 import ContentInput from '../../../atoms/Community/ArticleCreate/ContentInput'
 import { ArticleCreateFormData } from '../../../../types/Community/ArticleCreateData'
-import CategorySelectOption from '../../../atoms/Community/ArticleCreate/CategorySelectOption'
 
 export interface InputsProps {
   formData: ArticleCreateFormData;
@@ -13,7 +12,6 @@ const Inputs: React.FC<InputsProps> = ({ formData, handleChange }) => {
 
   return (
     <>
-      <CategorySelectOption />
       <TitleInput 
         onChangeText={handleChange("title")}
         value={formData.title}
