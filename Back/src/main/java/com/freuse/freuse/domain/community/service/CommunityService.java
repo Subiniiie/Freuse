@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CommunityService {
     //글 작성
-    Community createPost(String username, String title, String content);
+    Community createPost(String username, String title, String content, String category, String detailedCategory, String item );
 
     //특정 글 조회
     Optional<Community> getPostById(Long postId);

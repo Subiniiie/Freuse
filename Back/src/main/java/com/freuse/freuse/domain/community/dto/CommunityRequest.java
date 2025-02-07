@@ -10,4 +10,7 @@ public class CommunityRequest {
     private String username;
     private String title;
     private String content;
+    private String category;
+    private String detailedCategory;
+    private String item;
 }

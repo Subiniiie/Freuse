@@ -59,7 +59,7 @@ public class CommunityController {
 
     @PostMapping("/api/community/create")
     public ResponseEntity<CommunityDto> createPost(@RequestBody CommunityRequest request) {
-        Community community = communityService.createPost(request.getUsername(), request.getTitle(), request.getContent());
+        Community community = communityService.createPost(request.getUsername(), request.getTitle(), request.getContent(), request.getCategory(), request.getDetailedCategory(), request.getItem());
 
         CommunityDto communityDto = new CommunityDto();
         communityDto.setUsername(community.getUsername());

@@ -11,6 +11,9 @@ public class CommunityDto {
     private String username;
     private String title;
     private String content;
+    private String category;
+    private String detailedCategory;
+    private String item;
 
     public void setTitle(String title) {
         this.title = title;

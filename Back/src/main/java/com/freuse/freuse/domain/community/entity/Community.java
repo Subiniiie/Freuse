@@ -27,6 +27,15 @@ public class Community extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private String detailedCategory;
+
+    @Column(nullable = false)
+    private String item;
+
     public String getUsername() {
         return user != null ? user.getUsername() : null;
     }
