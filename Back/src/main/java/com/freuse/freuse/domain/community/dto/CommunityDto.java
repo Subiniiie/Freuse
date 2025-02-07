@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class CommunityDto {
 
+    private Long id;
     private String username;
     private String title;
     private String content;

@@ -23,7 +23,7 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public Community createPost(String username, String title, String content, String category, String detailedCategory, String item) {
+    public Community createPost( String username, String title, String content, String category, String detailedCategory, String item) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. username : " + username));
 

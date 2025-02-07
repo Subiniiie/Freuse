@@ -7,7 +7,6 @@ import com.freuse.freuse.domain.community.dto.CommunityResponseDto;
 import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.community.service.CommunityService;
-import com.freuse.freuse.domain.community.service.CommunityServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +34,9 @@ public class CommunityController {
                         community.getTitle(),
                         community.getContent(),
                         community.getUsername(),
+                        community.getCategory(),
+                        community.getDetailedCategory(),
+                        community.getItem(),
                         community.getCreatedAt(),
                         community.getUpdatedAt()))
                 .collect(Collectors.toList());
@@ -50,6 +52,9 @@ public class CommunityController {
                 community.getTitle(),
                 community.getContent(),
                 community.getUsername(),
+                community.getCategory(),
+                community.getDetailedCategory(),
+                community.getItem(),
                 community.getCreatedAt(),
                 community.getUpdatedAt()
         );
@@ -62,9 +67,13 @@ public class CommunityController {
         Community community = communityService.createPost(request.getUsername(), request.getTitle(), request.getContent(), request.getCategory(), request.getDetailedCategory(), request.getItem());
 
         CommunityDto communityDto = new CommunityDto();
+        communityDto.setId(community.getId());
         communityDto.setUsername(community.getUsername());
         communityDto.setTitle(community.getTitle());
         communityDto.setContent(community.getContent());
+        communityDto.setCategory(community.getCategory());
+        communityDto.setDetailedCategory(community.getDetailedCategory());
+        communityDto.setItem(community.getItem());
 
         return ResponseEntity.ok(communityDto);
     }
@@ -81,6 +90,9 @@ public class CommunityController {
                 updatedCommunity.getTitle(),
                 updatedCommunity.getContent(),
                 updatedCommunity.getUsername(),
+                updatedCommunity.getCategory(),
+                updatedCommunity.getDetailedCategory(),
+                updatedCommunity.getItem(),
                 updatedCommunity.getCreatedAt(),
                 updatedCommunity.getUpdatedAt()
         );

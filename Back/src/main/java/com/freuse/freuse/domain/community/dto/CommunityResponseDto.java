@@ -14,13 +14,19 @@ public class CommunityResponseDto {
     private String title;
     private String content;
     private String username;
+    private String category;
+    private String detailedCategory;
+    private String item;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public CommunityResponseDto(Long id, String title, String content, String username, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CommunityResponseDto(Long id, String title, String content, String category, String detailedCategory, String item, String username, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.category = category;
+        this.detailedCategory = detailedCategory;
+        this.item = item;
         this.username = username;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

@@ -9,6 +9,7 @@ import useUserStore from "../../../store/Auth/UserStore";
 import useCategorySelectOption from "./useCategorySelectOption";
 import useDetailedCategorySelectOption from "./useDetailedCategorySelectOption";
 import useProductSelectOption from "./useProductSelectOption";
+import useArticleItem from "../Main/useArticleItem";
 
 type ImageType = {
     uri: string;
@@ -22,12 +23,16 @@ const useArticleCreate = () => {
     const [ formdata, setFormData ] = useState<ArticleCreateFormData>({
         username: username,
         title: '',
-        content: ''
+        content: '',
+        category: '',
+        detailedCategory: '',
+        item: ''
     });
 
     const { value } = useCategorySelectOption();
     const { detailedValue } = useDetailedCategorySelectOption();
     const { productValue } = useProductSelectOption();
+    const { getArticleItem } = useArticleItem();
 
     const api_url = Config.API_URL
     const TOKEN_SERVICE = 'AUTH_SERVICE';
@@ -60,7 +65,9 @@ const useArticleCreate = () => {
 
 
     const submitArticleCreateForm = async () => {
-        console.log('카테고리는 ', value, detailedValue, productValue, "이다")
+        formdata.category = value
+        formdata.detailedCategory = detailedValue
+        formdata.item = productValue
         try {
             const token = await getToken();
             const response = await axios.post(
@@ -75,8 +82,12 @@ const useArticleCreate = () => {
             setFormData({
                 username: username,
                 title: '',
-                content: ''
+                content: '',
+                category: '',
+                detailedCategory: '',
+                item: ''
             })
+            getArticleItem(response.data.id)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
