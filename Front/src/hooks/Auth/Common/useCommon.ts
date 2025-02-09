@@ -24,7 +24,7 @@ const useCommon = () => {
                 return credentials.password;
             }
             return null;
-        } catch ( error) {
+        } catch (error) {
             console.log('Failed to get token : ', error);
             return null;
         }
