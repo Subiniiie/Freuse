@@ -110,4 +110,9 @@ public class CommunityController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/api/community/category")
+    public List<Community> searchByCategory(@RequestParam String keyword) {
+        return communityService.searchByCategory(keyword);
+    }
 }

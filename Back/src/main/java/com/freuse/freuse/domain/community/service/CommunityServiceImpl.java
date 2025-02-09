@@ -77,4 +77,9 @@ public class CommunityServiceImpl implements CommunityService {
 
         return communityRepository.save(community);
     }
+
+    @Override
+    public List<Community> searchByCategory(String keyword) {
+        return communityRepository.findByCategoryContaining(keyword);
+    }
 }

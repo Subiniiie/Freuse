@@ -27,4 +27,6 @@ public interface CommunityService {
     // 글 수정
     Community updatePost(Long id, String username, String title, String content);
 
+    //카테고리 별 조회
+    List<Community> searchByCategory(String keyword);
 }
