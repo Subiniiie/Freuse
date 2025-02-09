@@ -6,7 +6,7 @@ const SearchStyles = StyleSheet.create({
         padding: 5,
     },
     searchBarContainer: {
-        flexDirection: 'row',
+        margin: 10
     },
 })
 
