@@ -15,7 +15,8 @@ const HomeStyles = StyleSheet.create({
         height: "100%",
     },
     newsCard: {
-        height: 130,
+        height: 170,
+        padding: 0,
     },
     CustomButtonContainer: {
         width: 375,
