@@ -7,9 +7,15 @@ import { CommunityParamList } from "src/navigates/CommunityNavigator";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import useArticleItemStore from "../../../store/Community/ArticleItemStore";
+import { TabParamList } from "src/navigates/BottomTabNavigator";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 
-type ArticleItemScreenProps = StackNavigationProp<CommunityParamList, "ArticleItem">;
+type ArticleItemScreenProps = CompositeNavigationProp<
+    StackNavigationProp<CommunityParamList, "ArticleItem">,
+    BottomTabNavigationProp<TabParamList>
+>;
 
 const useArticleItem = () => {
 
@@ -38,7 +44,10 @@ const useArticleItem = () => {
                 }
             )
             setArticleItem(response.data)
-            navigation.navigate("ArticleItem")
+            navigation.navigate("거래", {
+                screen: "ArticleItem",
+                params: { id },
+            });
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 setError(error.response?.data?.message || error.message);

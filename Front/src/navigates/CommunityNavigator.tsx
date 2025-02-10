@@ -8,7 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 export type CommunityParamList = {
     CommunityMain: undefined;
     ArticleCreate: undefined;
-    ArticleItem: undefined;
+    ArticleItem: { id: number };
     ArticleUpdate: undefined;
 };
 
