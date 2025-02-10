@@ -43,7 +43,11 @@ const useMain = () => {
                 break;
         }
         Navigation.navigate(screen);
-    }
+    };
+
+    const getCategoryArticlesScreen = () => {
+
+    };
 
     const getCategoryArticles = useCallback(async (title: String) => {
         if (isLoading) return;
@@ -63,7 +67,7 @@ const useMain = () => {
                 }
             )
             setArticleList(response.data);
-            console.log('데이터 저장 성공')
+            getCategoryArticlesScreen();
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
