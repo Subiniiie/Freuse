@@ -3,8 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { HomeParamList } from "src/navigates/HomeNavigator";
 import useCommon from "../Auth/Common/useCommon";
-import axios, { Axios } from "axios";
+import axios from "axios";
+import { useCallback } from "react";
 import Config from "react-native-config";
+import useCategoryListStroe from "../../store/Home/CategoryListStore";
 
 type HomeScreennavigationProps = StackNavigationProp<HomeParamList, keyof HomeParamList>;
 
@@ -17,6 +19,8 @@ const useMain = () => {
 
     const { getToken } = useCommon();
     const api_url = Config.API_URL;
+
+    const { setArticleList, isLoading, setIsLoading } = useCategoryListStroe();
 
     const goSeveralCategory = (id: number ) => {
         let screen: keyof HomeParamList;
@@ -41,9 +45,12 @@ const useMain = () => {
         Navigation.navigate(screen);
     }
 
-    const getCategoryArticles = async (title: String) => {
-        const token = await getToken();
+    const getCategoryArticles = useCallback(async (title: String) => {
+        if (isLoading) return;
+        setIsLoading(true);
+
         try { 
+            const token = await getToken();
             const response = await axios.get(
                 `${api_url}/api/community/category`,
                 {
@@ -55,7 +62,8 @@ const useMain = () => {
                     }
                 }
             )
-            console.log('response : ', response.data)
+            setArticleList(response.data);
+            console.log('데이터 저장 성공')
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('에러', {
@@ -64,8 +72,10 @@ const useMain = () => {
                     status: error.response?.status
                 })
             }
+        } finally {
+            setIsLoading(false);
         }
-    };
+    }, []);
 
     return {
         openFreitagWebsite,

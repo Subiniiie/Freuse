@@ -1,14 +1,16 @@
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import useMain from '../../hooks/Home/useMain'
 
 export default function BagsMainScreen() {
   const { getCategoryArticles } = useMain();
 
-  useFocusEffect(() => {
-    getCategoryArticles("bag");
-  });
+  useFocusEffect(
+    useCallback(() => {
+      getCategoryArticles("bag");
+    }, [getCategoryArticles])
+  );
 
   return (
     <SafeAreaView style={styles.container}>
