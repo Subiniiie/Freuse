@@ -7,6 +7,7 @@ export interface SignUpFormData {
     username: string;
     password: string;
     email: string;
+    profileImage: string | null;
 }
 
 export interface SignUpFormDataCheck {

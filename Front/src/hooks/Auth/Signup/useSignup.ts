@@ -5,6 +5,7 @@ import Config from "react-native-config";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthParamList } from "src/navigates/AuthNavigator";
+import { launchImageLibrary } from "react-native-image-picker";
 
 type LoginScreenNavigationProps = StackNavigationProp<AuthParamList, "Login">;
 
@@ -17,7 +18,8 @@ const useSignup = () => {
     const [ formData, setFormData ] = useState<SignUpFormData>({
         username: '',
         password: '',
-        email: ''
+        email: '',
+        profileImage: null,
     });
 
     const [ temporaryFormData, setTempporaryFormData ] = useState<SignUpFormDataCheck>({
@@ -26,6 +28,8 @@ const useSignup = () => {
         confirmPassword: '',
         email: ''
     })
+
+    const [ profileImage, setProfileImage ] = useState<string | null>(null);
 
     const navigation = useNavigation<LoginScreenNavigationProps>();
 
@@ -69,6 +73,23 @@ const useSignup = () => {
         }
     };
 
+    const selectProfileImage = () => {
+        launchImageLibrary(
+            { mediaType: "photo", maxWidth: 500, maxHeight: 500, quality: 0.8},
+            (response) => {
+                if (response.didCancel) return;
+                if (response.assets && response.assets.length > 0) {
+                    const imageUri = response.assets[0].uri || null;
+                    setProfileImage(imageUri);
+                    setFormData((prev) => ({
+                        ...prev,
+                        profileImage: imageUri,
+                    }));
+                }
+            }
+        )
+    };
+
     // 회원가입 api 연결
     const api_url = Config.API_URL
 
@@ -88,7 +109,8 @@ const useSignup = () => {
                 setFormData({
                     username: "",
                     password: "",
-                    email: ""
+                    email: "",
+                    profileImage: null
                 });
                 setTempporaryFormData({
                     username: "",
@@ -118,6 +140,7 @@ const useSignup = () => {
         getValueIndex,
         getFieldIndex,
         submitSignupForm,
+        selectProfileImage,
         visible
     }
 };

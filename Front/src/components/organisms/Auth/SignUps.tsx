@@ -3,9 +3,11 @@ import SignUpInputs from '../../molecules/Auth/SignUpInputs'
 import SignUpAlert from '../../atoms/Auth/Signup/SignUpAlert'
 import SignUpBtns from '../../molecules/Auth/SignUpBtns'
 import useSignup from '../../../hooks/Auth/Signup/useSignup'
+import SignUpInputImage from '../../atoms/Auth/Signup/SignUpInputImage'
+
 
 export default function SignUps() {
-  const { handleChange, getValueIndex, getFieldIndex, submitSignupForm, visible } = useSignup();
+  const { handleChange, getValueIndex, getFieldIndex, submitSignupForm, selectProfileImage, visible } = useSignup();
 
   return (
     <>
@@ -13,6 +15,9 @@ export default function SignUps() {
         handleChange={handleChange}
         getValueIndex={getValueIndex}
         getFieldIndex={getFieldIndex}
+      />
+      <SignUpInputImage 
+        selectProfileImage={selectProfileImage}
       />
       <SignUpBtns 
         submitSignupForm={submitSignupForm}
