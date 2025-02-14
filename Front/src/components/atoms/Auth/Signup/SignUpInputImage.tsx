@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { Button } from '@rneui/themed';
 import React from 'react'
 
@@ -11,11 +11,9 @@ export default function SignupInputImage({ selectProfileImage }: SignUpInputImag
     <View>
       <Text>프로필 사진 등록</Text>
       <Button
-        title="확인"
+        title="등록"
         onPress={selectProfileImage}
       />
     </View>
   )
 }
-
-const styles = StyleSheet.create({})

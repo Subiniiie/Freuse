@@ -2,10 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { SignUpFormData, SignUpFormDataCheck } from "../../../types/Auth/SignUpData";
 import axios from "axios";
 import Config from "react-native-config";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthParamList } from "src/navigates/AuthNavigator";
-import { launchImageLibrary } from "react-native-image-picker";
+import { launchImageLibrary, launchCamera, CameraOptions, MediaType } from "react-native-image-picker";
 
 type LoginScreenNavigationProps = StackNavigationProp<AuthParamList, "Login">;
 
@@ -32,6 +33,14 @@ const useSignup = () => {
     const [ profileImage, setProfileImage ] = useState<string | null>(null);
 
     const navigation = useNavigation<LoginScreenNavigationProps>();
+
+    const options: CameraOptions = {
+        mediaType: 'photo' as MediaType,
+        maxWidth: 500,
+        maxHeight: 500,
+        quality: 0.8,
+        saveToPhotos: true,
+    };
 
     // 회원가입 완료 모달
     const [visible, setVisible ] = useState<boolean>(false);
@@ -73,21 +82,60 @@ const useSignup = () => {
         }
     };
 
-    const selectProfileImage = () => {
-        launchImageLibrary(
-            { mediaType: "photo", maxWidth: 500, maxHeight: 500, quality: 0.8},
-            (response) => {
-                if (response.didCancel) return;
-                if (response.assets && response.assets.length > 0) {
-                    const imageUri = response.assets[0].uri || null;
-                    setProfileImage(imageUri);
-                    setFormData((prev) => ({
-                        ...prev,
-                        profileImage: imageUri,
-                    }));
-                }
+    const takePhoto = async () => {
+        try {
+            const result = await launchCamera(options);
+            if (result.didCancel) return;
+            if (result.assets && result.assets.length > 0) {
+                const imageUri = result.assets[0].uri || null;
+                setProfileImage(imageUri);
+                setFormData((prev) => ({
+                    ...prev,
+                    profileImage: imageUri,
+                }));
             }
-        )
+        } catch (error) {
+            console.log('Error taking photo : ', error);
+        }
+    };
+
+    const selectFromGallery = async () => {
+        try {
+             const result = await launchImageLibrary(options);
+             if (result.didCancel) return;
+             if (result.assets && result.assets.length > 0) {
+                const imageUri = result.assets[0].uri || null;
+                setProfileImage(imageUri);
+                setFormData((prev) => ({
+                    ...prev,
+                    profileImage: imageUri,
+                }));
+             }
+        } catch (error) {
+            console.log('Error selecting photo: ', error);
+        }
+    };
+
+    const selectProfileImage = () => {
+        Alert.alert(
+            '프로필 이미지 선택',
+            '이미지를 선택하는 방법을 선택하세요.',
+            [
+                {
+                    text: '카메라로 촬영',
+                    onPress: takePhoto,
+                },
+                {
+                    text: '갤러리에서 선택',
+                    onPress: selectFromGallery,
+                },
+                {
+                    text: '취소',
+                    style: 'cancel',
+                },
+            ],
+            { cancelable: true }
+        );
     };
 
     // 회원가입 api 연결
