@@ -74,7 +74,8 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             String token = jwtTokenProvider.createToken(user.getUsername());
-            AuthResponseDto authResponseDto = new AuthResponseDto(token, user.getUsername(), user.getEmail());
+            AuthResponseDto authResponseDto = new AuthResponseDto(token, user.getId(), user.getUsername(), user.getEmail());
+            System.out.println("로그인 성공: " + authResponseDto.toString());
             return ResponseEntity.ok(authResponseDto);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이메일 또는 비밀번호가 잘못되었습니다.");

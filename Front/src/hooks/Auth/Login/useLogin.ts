@@ -8,7 +8,7 @@ import * as KeyChain from "react-native-keychain";
 
 const useLogin = () => {
     const { setCheckLogin } = useLoginStore();
-    const { setUsername, setEmail } = useUserStore();
+    const { setUsername, setEmail, setId } = useUserStore();
 
     const TOKEN_USERNAME = 'AUTH_TOKEN';
     const TOKEN_SERVICE = 'AUTH_SERVICE';
@@ -65,6 +65,7 @@ const useLogin = () => {
 
     const submitLoginForm = async () => {
         try {
+            console.log('로그인 시도', formData)
             const response = await axios.post(
                 `${api_url}/api/user/login`,
                 formData,
@@ -82,6 +83,7 @@ const useLogin = () => {
             })
             setUsername(response.data.username)
             setEmail(response.data.email)
+            setId(response.data.id)
             const tokenStored = await storeToken(response.data.token)
         } catch (error) {
             if (axios.isAxiosError(error)) {

@@ -5,6 +5,8 @@ interface UserInfo {
     setUsername: (text: any) => void;
     email: string;
     setEmail: (text: any) => void;
+    id: number;
+    setId: (id: number) => void;
 };
 
 const useUserStore = create<UserInfo>((set) => ({
@@ -12,6 +14,8 @@ const useUserStore = create<UserInfo>((set) => ({
     setUsername: (text) => set({ username: text }),
     email: '',
     setEmail: (text) => set({email: text}),
+    id: 0,
+    setId: (id) => set({ id }),
 }))
 
 export default useUserStore;
