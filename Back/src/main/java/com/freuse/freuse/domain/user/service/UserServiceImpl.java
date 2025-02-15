@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public User registerUser(String username, String password, String email) {
+    public User registerUser(String username, String password, String email, String profileImageUrl) {
         if (userRepository.existsByUsername(username)) {
             throw new UserAlreadyExistsException("이미 사용 중인 닉네임 입니다.");
         }
@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService{
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
+        user.setProfileImageUrl(profileImageUrl);
 
         return userRepository.save(user);
     }

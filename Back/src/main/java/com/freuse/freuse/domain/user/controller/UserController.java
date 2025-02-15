@@ -7,11 +7,19 @@ import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.service.UserService;
 import com.freuse.freuse.global.exception.UserAlreadyExistsException;
 import com.freuse.freuse.global.provider.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class UserController {
@@ -29,15 +37,34 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
     @PostMapping("api/user/signup")
-    public ResponseEntity<String> signup(@RequestBody UserDto userDto) {
+    public ResponseEntity<String> signup(
+            @ModelAttribute UserDto userDto,
+            @RequestParam(value = "file", required = false) MultipartFile file) {
         try {
-            userService.registerUser(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
+            String imageUrl = null;
+            if (file != null && !file.isEmpty()) {
+                // 이미지 처리 로직
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                imageUrl = "/images/" + fileName;
+            }
+            userService.registerUser(userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), imageUrl);
             System.out.println("회원가입 성공");
             return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공");
         } catch (UserAlreadyExistsException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미지 업로드 실패");
         }
     }
 

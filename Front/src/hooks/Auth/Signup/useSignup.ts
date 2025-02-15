@@ -143,15 +143,35 @@ const useSignup = () => {
 
     const submitSignupForm = async () => {
         try {
+            const formDataToSend = new FormData();
+
+            formDataToSend.append('username', formData.username);
+            formDataToSend.append('password', formData.password);
+            formDataToSend.append('email', formData.email);
+
+            if (formData.profileImage) {
+                const fileExtension = formData.profileImage.split('.').pop();
+
+                formDataToSend.append('file', {
+                    uri: formData.profileImage,
+                    type: `image/${fileExtension}`,
+                    name: `profile.${fileExtension}`
+                });
+            }
+
             const response = await axios.post(
                 `${api_url}/api/user/signup`,
-                formData, 
+                formDataToSend, 
                 {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data',
+                        'Accept': 'application/json'
+                    },
+                    transformRequest: (data, headers) => {
+                        return formDataToSend
                     }
-                }
-            )
+                },
+            );
             setVisible(true);
             setTimeout(() => {
                 setFormData({
