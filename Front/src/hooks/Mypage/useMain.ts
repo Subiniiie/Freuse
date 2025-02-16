@@ -19,7 +19,6 @@ const useMain = () => {
                     }
                 }
             )
-            console.log('유저 정보 들고 오기', response.data)
             setProfileUrl(response.data.profileImageUrl);
         } catch (error) {
             if (axios.isAxiosError(error)) {
