@@ -3,6 +3,7 @@ package com.freuse.freuse.domain.user.controller;
 
 import com.freuse.freuse.domain.user.dto.UserDto;
 import com.freuse.freuse.domain.user.dto.AuthResponseDto;
+import com.freuse.freuse.domain.user.dto.UserResponseDto;
 import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.service.UserService;
 import com.freuse.freuse.global.exception.UserAlreadyExistsException;
@@ -32,10 +33,24 @@ public class UserController {
     }
 
     @GetMapping("api/user/signup/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable Long id) {
         User user = userService.getUserId(id);
-        return ResponseEntity.ok(user);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserResponseDto userResponseDto = new UserResponseDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                "http://localhost:8080" + user.getProfileImageUrl()
+        );
+
+        return ResponseEntity.ok(userResponseDto);
     }
+
+
+
 
     @Value("${file.upload-dir}")
     private String uploadDir;

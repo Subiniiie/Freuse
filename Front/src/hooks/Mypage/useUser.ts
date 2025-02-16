@@ -4,7 +4,7 @@ import useUserStore from "../../store/Auth/UserStore";
 
 const useUser = () => {
     const { setCheckLogin } = useLoginStore();
-    const { setUsername, setEmail } = useUserStore();
+    const { setUsername, setEmail, setProfileUrl } = useUserStore();
 
     const TOKEN_SERVICE = 'AUTH_SERVICE';
 
@@ -34,6 +34,7 @@ const useUser = () => {
                 setCheckLogin();
                 setUsername("");
                 setEmail("");
+                setProfileUrl("");
                 console.log('토큰 삭제가 완료되었습니다.')
             } else {
                 console.log('토큰 삭제에 실패했습니다.')
