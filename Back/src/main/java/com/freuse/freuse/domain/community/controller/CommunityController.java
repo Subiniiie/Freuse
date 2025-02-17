@@ -7,9 +7,12 @@ import com.freuse.freuse.domain.community.dto.CommunityResponseDto;
 import com.freuse.freuse.domain.community.entity.Community;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.community.service.CommunityService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,19 +66,38 @@ public class CommunityController {
     }
 
     @PostMapping("/api/community/create")
-    public ResponseEntity<CommunityDto> createPost(@RequestBody CommunityRequest request) {
-        Community community = communityService.createPost(request.getUsername(), request.getTitle(), request.getContent(), request.getCategory(), request.getDetailedCategory(), request.getItem());
+    public ResponseEntity<CommunityDto> createPost(
+            @ModelAttribute CommunityRequest request,
+            @RequestParam(value = "file", required = false) MultipartFile file) {
+        try {
+            byte[] imagesData = null;
+            if (file != null && !file.isEmpty()) {
+                imagesData = file.getBytes();
+            }
 
-        CommunityDto communityDto = new CommunityDto();
-        communityDto.setId(community.getId());
-        communityDto.setUsername(community.getUsername());
-        communityDto.setTitle(community.getTitle());
-        communityDto.setContent(community.getContent());
-        communityDto.setCategory(community.getCategory());
-        communityDto.setDetailedCategory(community.getDetailedCategory());
-        communityDto.setItem(community.getItem());
+            Community community = communityService.createPost(
+                    request.getUsername(),
+                    request.getTitle(),
+                    request.getContent(),
+                    request.getCategory(),
+                    request.getDetailedCategory(),
+                    request.getItem(),
+                    imagesData
+            );
 
-        return ResponseEntity.ok(communityDto);
+            CommunityDto communityDto = new CommunityDto();
+            communityDto.setId(community.getId());
+            communityDto.setUsername(community.getUsername());
+            communityDto.setTitle(community.getTitle());
+            communityDto.setContent(community.getContent());
+            communityDto.setCategory(community.getCategory());
+            communityDto.setDetailedCategory(community.getDetailedCategory());
+            communityDto.setItem(community.getItem());
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(communityDto);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/api/community/{id}")

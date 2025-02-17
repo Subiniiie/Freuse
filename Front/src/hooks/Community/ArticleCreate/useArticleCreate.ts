@@ -70,9 +70,24 @@ const useArticleCreate = () => {
         formdata.item = productValue
         try {
             const token = await getToken();
+
+            const formDataToSend = new FormData();
+            formDataToSend.append("username", formdata.username)
+            formDataToSend.append("title", formdata.title)
+            formDataToSend.append("content", formdata.content)
+            formDataToSend.append("category", formdata.category)
+            formDataToSend.append("detailedCategory", formdata.detailedCategory)
+            formDataToSend.append("item", formdata.item)
+            images.forEach((image, index) => {
+                formDataToSend.append("images", {
+                    uri : image.uri,
+                    name: `image_${index}.jpg`,
+                    type: "image/jpeg"
+                });
+            })
             const response = await axios.post(
                 `${api_url}/api/community/create`,
-                formdata,
+                formDataToSend,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`

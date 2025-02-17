@@ -1,13 +1,14 @@
 package com.freuse.freuse.domain.community.service;
 
 import com.freuse.freuse.domain.community.entity.Community;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CommunityService {
     //글 작성
-    Community createPost(String username, String title, String content, String category, String detailedCategory, String item );
+    Community createPost(String username, String title, String content, String category, String detailedCategory, String item, byte[] imageData);
 
     //특정 글 조회
     Optional<Community> getPostById(Long postId);

@@ -36,6 +36,11 @@ public class Community extends BaseEntity {
     @Column(nullable = false)
     private String item;
 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] imageData;
+
+
     public String getUsername() {
         return user != null ? user.getUsername() : null;
     }

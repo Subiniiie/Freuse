@@ -5,7 +5,7 @@ import useArticleCreate from '../../../hooks/Community/ArticleCreate/useArticleC
 import Options from '../../organisms/Community/ArticleCreate/Options'
 
 export default function ArticleCreateMain() {
-  const { formdata, handleChange, submitArticleCreateForm } = useArticleCreate();
+  const { formdata, handleChange, submitArticleCreateForm, handleSelectImages } = useArticleCreate();
 
 
   return (
@@ -14,6 +14,7 @@ export default function ArticleCreateMain() {
       <Inputs 
         formData={formdata}
         handleChange={handleChange}
+        handleSelectImages={handleSelectImages}
       />
       <ArticleSubmitBtn 
         submitArticleCreateForm={submitArticleCreateForm}

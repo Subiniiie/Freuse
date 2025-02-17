@@ -1,14 +1,16 @@
 import React from 'react'
 import TitleInput from '../../../atoms/Community/ArticleCreate/TitleInput'
 import ContentInput from '../../../atoms/Community/ArticleCreate/ContentInput'
+import ImagesSelectBtn from '../../../atoms/Community/ArticleCreate/ImagesSelectBtn'
 import { ArticleCreateFormData } from '../../../../types/Community/ArticleCreateData'
 
 export interface InputsProps {
   formData: ArticleCreateFormData;
   handleChange: (filed: keyof ArticleCreateFormData) => (text: string) => void;
+  handleSelectImages: () => void;
 }
 
-const Inputs: React.FC<InputsProps> = ({ formData, handleChange }) => {
+const Inputs: React.FC<InputsProps> = ({ formData, handleChange, handleSelectImages }) => {
 
   return (
     <>
@@ -20,7 +22,9 @@ const Inputs: React.FC<InputsProps> = ({ formData, handleChange }) => {
         onChangeText={handleChange("content")}
         value={formData.content}
       />
-      {/* 사진 올라오는 거 확인하고 PicturesInput 추가하기 */}
+      <ImagesSelectBtn 
+        handleSelectImages={handleSelectImages}
+      />
     </>
   )
 }
