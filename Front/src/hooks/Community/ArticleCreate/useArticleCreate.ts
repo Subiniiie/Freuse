@@ -79,7 +79,7 @@ const useArticleCreate = () => {
             formDataToSend.append("detailedCategory", formdata.detailedCategory)
             formDataToSend.append("item", formdata.item)
             images.forEach((image, index) => {
-                formDataToSend.append("images", {
+                formDataToSend.append("file", {
                     uri : image.uri,
                     name: `image_${index}.jpg`,
                     type: "image/jpeg"
@@ -90,7 +90,8 @@ const useArticleCreate = () => {
                 formDataToSend,
                 {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data',
                     }
                 }
             )
