@@ -17,8 +17,6 @@ public class CommunityImage {
     @JoinColumn(name = "community_id", nullable = false)
     private Community community;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private byte[] imageData;
 
     public CommunityImage(Community community, byte[] imageData) {

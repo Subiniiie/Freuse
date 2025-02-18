@@ -85,6 +85,7 @@ const useArticleCreate = () => {
                     type: "image/jpeg"
                 });
             })
+            console.log('formDataToSend 확인', formDataToSend)
             const response = await axios.post(
                 `${api_url}/api/community/create`,
                 formDataToSend,

@@ -6,13 +6,14 @@ import com.freuse.freuse.domain.community.repository.CommunityImageRepository;
 import com.freuse.freuse.domain.community.repository.CommunityRepository;
 import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.domain.user.repository.UserRepository;
-import org.hibernate.query.sqm.tree.domain.SqmTreatedRoot;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.module.ResolutionException;
-import java.net.MulticastSocket;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,8 @@ public class CommunityServiceImpl implements CommunityService {
     private final UserRepository userRepository;
     private final CommunityImageRepository communityImageRepository;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     public CommunityServiceImpl(CommunityRepository communityRepository, UserRepository userRepository, CommunityImageRepository communityImageRepository) {
         this.communityRepository = communityRepository;
         this.userRepository = userRepository;
@@ -31,7 +34,8 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public Community createPost( String username, String title, String content, String category, String detailedCategory, String item, List<MultipartFile> files) {
+    @Transactional
+    public Community createPost( String username, String title, String content, String category, String detailedCategory, String item, @RequestParam("file") List<MultipartFile> files) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResolutionException("사용자를 찾을 수 없습니다. username : " + username));
 
@@ -55,7 +59,14 @@ public class CommunityServiceImpl implements CommunityService {
                         }
                     })
                     .collect(Collectors.toList());
-            communityImageRepository.saveAll(imageEntities);
+            if (imageEntities.isEmpty()) {
+                logger.info("이미지가 존재하지 않습니다.");
+            } else {
+                communityImageRepository.saveAll(imageEntities);
+                logger.info("이미지 저장 완료");
+            }
+        } else {
+            logger.info("files가 빈 값");
         }
         return savedCommunity;
     }
