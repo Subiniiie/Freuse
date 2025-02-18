@@ -37,6 +37,7 @@ const useCommunityMain = () => {
 
         try {
             const token = await getToken();
+            console.log('니가 안되는거임?', token)
             const response = await axios.get(
                 `${api_url}/api/community`,
                 {
@@ -46,9 +47,13 @@ const useCommunityMain = () => {
                 }
             )
             setArticleList(response.data);
+            console.log('게시물 목록 불러오기')
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                setError(error.response?.data?.message || error.message);
+                console.log('에러', {
+                    message: error.response?.data,
+                    status: error.response?.status
+                })
             } else {
                 setError('알 수 없는 에러가 발생했습니다.')
             }

@@ -38,10 +38,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
+        logger.info("요청 헤더에서 가져온 토큰 : "+ token);
 
         if (jwtTokenProvider.validateToken(token)) {
             String username = jwtTokenProvider.getUsernameFromToken(token);
-
+            logger.info("토큰 검증 사용자 : " + username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
@@ -54,6 +55,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+                logger.info("securityContext에 인증 정보 설정 완료 : " + SecurityContextHolder.getContext().getAuthentication());
+            } else {
+                logger.warn("토큰이 유효하지 않음 또는 없음");
             }
         }
         filterChain.doFilter(request, response);

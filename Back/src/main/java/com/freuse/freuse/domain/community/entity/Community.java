@@ -5,12 +5,16 @@ import com.freuse.freuse.domain.user.entity.User;
 import com.freuse.freuse.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name="community")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Community extends BaseEntity {
 
     @Id
@@ -36,10 +40,8 @@ public class Community extends BaseEntity {
     @Column(nullable = false)
     private String item;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] imageData;
-
+    @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CommunityImage> images;
 
     public String getUsername() {
         return user != null ? user.getUsername() : null;

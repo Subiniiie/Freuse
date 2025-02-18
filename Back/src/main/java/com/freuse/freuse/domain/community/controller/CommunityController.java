@@ -12,15 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Base64;
 
 @RestController
 public class CommunityController {
 
     private final CommunityService communityService;
     private final CommunityRepository communityRepository;
+
+    private List<String> getBase64Images(Community community) {
+        return community.getImages().stream()
+                .map(image -> Base64.getEncoder().encodeToString(image.getImageData()))
+                .collect(Collectors.toList());
+    }
 
     public CommunityController(CommunityService communityService, CommunityRepository communityRepository) {
         this.communityService = communityService;
@@ -40,6 +46,7 @@ public class CommunityController {
                         community.getCategory(),
                         community.getDetailedCategory(),
                         community.getItem(),
+                        getBase64Images(community),
                         community.getCreatedAt(),
                         community.getUpdatedAt()))
                 .collect(Collectors.toList());
@@ -58,6 +65,7 @@ public class CommunityController {
                 community.getCategory(),
                 community.getDetailedCategory(),
                 community.getItem(),
+                getBase64Images(community),
                 community.getCreatedAt(),
                 community.getUpdatedAt()
         );
@@ -68,13 +76,8 @@ public class CommunityController {
     @PostMapping("/api/community/create")
     public ResponseEntity<CommunityDto> createPost(
             @ModelAttribute CommunityRequest request,
-            @RequestParam(value = "file", required = false) MultipartFile file) {
+            @RequestParam(value = "files", required = false) List<MultipartFile> files) {
         try {
-            byte[] imagesData = null;
-            if (file != null && !file.isEmpty()) {
-                imagesData = file.getBytes();
-            }
-
             Community community = communityService.createPost(
                     request.getUsername(),
                     request.getTitle(),
@@ -82,7 +85,7 @@ public class CommunityController {
                     request.getCategory(),
                     request.getDetailedCategory(),
                     request.getItem(),
-                    imagesData
+                    files
             );
 
             CommunityDto communityDto = new CommunityDto();
@@ -95,7 +98,7 @@ public class CommunityController {
             communityDto.setItem(community.getItem());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(communityDto);
-        } catch (IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -115,6 +118,7 @@ public class CommunityController {
                 updatedCommunity.getCategory(),
                 updatedCommunity.getDetailedCategory(),
                 updatedCommunity.getItem(),
+                getBase64Images(updatedCommunity),
                 updatedCommunity.getCreatedAt(),
                 updatedCommunity.getUpdatedAt()
         );

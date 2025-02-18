@@ -106,13 +106,13 @@ const useArticleCreate = () => {
             getArticleItem(response.data.id)
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                console.log('에러', {
+                console.log('게시물 생성 실패 에러', {
                     message: error.message,
                     response: error.response?.data,
                     status: error.response?.status
                 });
             } else {
-                console.log('알 수 없는 에러', error)
+                console.log('게시물 생성 실패 알 수 없는 에러', error)
             }
         };
     };
